@@ -5,11 +5,13 @@
 #include <unistd.h>
 
 
-int main(int argc, char** argv) {
-
-	//log
-	printf("[%s : %d] done\n", base_name(__FILE__), __LINE__);
-
-
-	return 0;
-}
+//int main(int argc, char** argv) {
+//
+//
+//
+//	//log
+//	printf("[%s : %d] done\n", base_name(__FILE__), __LINE__);
+//
+//
+//	return 0;
+//}

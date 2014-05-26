@@ -1,300 +1,339 @@
+#ifndef LIB_H
+#include "../include/lib.h"
+#endif
+
+
 typedef struct
 {
-  int fs; /* •W–{‰»ü”g” */
-  int bits; /* —Êq‰»¸“x */
-  int length; /* ‰¹ƒf[ƒ^‚Ì’·‚³ */
-  double *s; /* ‰¹ƒf[ƒ^ */
+	int fs; /* ï¿½Wï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ */
+	int bits; /* ï¿½Êqï¿½ï¿½ï¿½ï¿½ï¿½x */
+	int length; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ì’ï¿½ï¿½ï¿½ */
+	double *s; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ */
 } MONO_PCM;
 
 typedef struct
 {
-  int fs; /* •W–{‰»ü”g” */
-  int bits; /* —Êq‰»¸“x */
-  int length; /* ‰¹ƒf[ƒ^‚Ì’·‚³ */
-  double *sL; /* ‰¹ƒf[ƒ^iLƒ`ƒƒƒ“ƒlƒ‹j */
-  double *sR; /* ‰¹ƒf[ƒ^iRƒ`ƒƒƒ“ƒlƒ‹j */
+	int fs; /* ï¿½Wï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ */
+	int bits; /* ï¿½Êqï¿½ï¿½ï¿½ï¿½ï¿½x */
+	int length; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ì’ï¿½ï¿½ï¿½ */
+	double *sL; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iLï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½j */
+	double *sR; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iRï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½j */
 } STEREO_PCM;
 
 void mono_wave_read(MONO_PCM *pcm, char *file_name)
 {
-  FILE *fp;
-  int n;
-  char riff_chunk_ID[4];
-  long riff_chunk_size;
-  char riff_form_type[4];
-  char fmt_chunk_ID[4];
-  long fmt_chunk_size;
-  short fmt_wave_format_type;
-  short fmt_channel;
-  long fmt_samples_per_sec;
-  long fmt_bytes_per_sec;
-  short fmt_block_size;
-  short fmt_bits_per_sample;
-  char data_chunk_ID[4];
-  long data_chunk_size;
-  short data;
-  
-  fp = fopen(file_name, "rb");
-  
-  fread(riff_chunk_ID, 1, 4, fp);
-  fread(&riff_chunk_size, 4, 1, fp);
-  fread(riff_form_type, 1, 4, fp);
-  fread(fmt_chunk_ID, 1, 4, fp);
-  fread(&fmt_chunk_size, 4, 1, fp);
-  fread(&fmt_wave_format_type, 2, 1, fp);
-  fread(&fmt_channel, 2, 1, fp);
-  fread(&fmt_samples_per_sec, 4, 1, fp);
-  fread(&fmt_bytes_per_sec, 4, 1, fp);
-  fread(&fmt_block_size, 2, 1, fp);
-  fread(&fmt_bits_per_sample, 2, 1, fp);
-  fread(data_chunk_ID, 1, 4, fp);
-  fread(&data_chunk_size, 4, 1, fp);
-  
-  pcm->fs = fmt_samples_per_sec; /* •W–{‰»ü”g” */
-  pcm->bits = fmt_bits_per_sample; /* —Êq‰»¸“x */
-  pcm->length = data_chunk_size / 2; /* ‰¹ƒf[ƒ^‚Ì’·‚³ */
-  pcm->s = calloc(pcm->length, sizeof(double)); /* ƒƒ‚ƒŠ‚ÌŠm•Û */
-  
-  for (n = 0; n < pcm->length; n++)
-  {
-    fread(&data, 2, 1, fp); /* ‰¹ƒf[ƒ^‚Ì“Ç‚İæ‚è */
-    pcm->s[n] = (double)data / 32768.0; /* ‰¹ƒf[ƒ^‚ğ-1ˆÈã1–¢–‚Ì”ÍˆÍ‚É³‹K‰»‚·‚é */
-  }
-  
-  fclose(fp);
+	FILE *fp;
+	int n;
+	char riff_chunk_ID[4];
+	long riff_chunk_size;
+	char riff_form_type[4];
+	char fmt_chunk_ID[4];
+	long fmt_chunk_size;
+	short fmt_wave_format_type;
+	short fmt_channel;
+	long fmt_samples_per_sec;
+	long fmt_bytes_per_sec;
+	short fmt_block_size;
+	short fmt_bits_per_sample;
+	char data_chunk_ID[4];
+	long data_chunk_size;
+	short data;
+
+	fp = fopen(file_name, "rb");
+
+	if (fp == NULL) {
+		//log
+		printf("[%s : %d] Can't open the file: %s\n", base_name(__FILE__), __LINE__, file_name);
+
+		exit(-1);
+
+	} else {
+
+		//log
+		printf("[%s : %d] File => Opened: %s\n", base_name(__FILE__), __LINE__, file_name);
+
+	}
+
+
+	fread(riff_chunk_ID, 1, 4, fp);
+	fread(&riff_chunk_size, 4, 1, fp);
+	fread(riff_form_type, 1, 4, fp);
+	fread(fmt_chunk_ID, 1, 4, fp);
+	fread(&fmt_chunk_size, 4, 1, fp);
+	fread(&fmt_wave_format_type, 2, 1, fp);
+	fread(&fmt_channel, 2, 1, fp);
+	fread(&fmt_samples_per_sec, 4, 1, fp);
+	fread(&fmt_bytes_per_sec, 4, 1, fp);
+	fread(&fmt_block_size, 2, 1, fp);
+	fread(&fmt_bits_per_sample, 2, 1, fp);
+	fread(data_chunk_ID, 1, 4, fp);
+	fread(&data_chunk_size, 4, 1, fp);
+
+	//log
+	printf("[%s : %d] fread() => complete\n", base_name(__FILE__), __LINE__);
+
+	//log
+	printf("[%s : %d] fmt_samples_per_sec => %ld\n",
+		base_name(__FILE__), __LINE__, fmt_samples_per_sec);
+
+
+	pcm->fs = fmt_samples_per_sec; /* ï¿½Wï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ */
+	pcm->bits = fmt_bits_per_sample; /* ï¿½Êqï¿½ï¿½ï¿½ï¿½ï¿½x */
+	pcm->length = data_chunk_size / 2; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ì’ï¿½ï¿½ï¿½ */
+	pcm->s = calloc(pcm->length, sizeof(double)); /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌŠmï¿½ï¿½ */
+
+	//log
+	printf("[%s : %d] calloc => done\n", base_name(__FILE__), __LINE__);
+
+	//log
+	printf("[%s : %d] pcm->length => %d\n", base_name(__FILE__), __LINE__, pcm->length);
+
+
+	for (n = 0; n < pcm->length; n++)
+	{
+	  fread(&data, 2, 1, fp); /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ì“Ç‚İï¿½ï¿½ */
+	  pcm->s[n] = (double)data / 32768.0; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½-1ï¿½Èï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½Ì”ÍˆÍ‚Éï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	}
+
+	fclose(fp);
+
+	//log
+	printf("[%s : %d] File => closed: %s\n", base_name(__FILE__), __LINE__, file_name);
+
+
 }
 
 void mono_wave_write(MONO_PCM *pcm, char *file_name)
 {
-  FILE *fp;
-  int n;
-  char riff_chunk_ID[4];
-  long riff_chunk_size;
-  char riff_form_type[4];
-  char fmt_chunk_ID[4];
-  long fmt_chunk_size;
-  short fmt_wave_format_type;
-  short fmt_channel;
-  long fmt_samples_per_sec;
-  long fmt_bytes_per_sec;
-  short fmt_block_size;
-  short fmt_bits_per_sample;
-  char data_chunk_ID[4];
-  long data_chunk_size;
-  short data;
-  double s;
-  
-  riff_chunk_ID[0] = 'R';
-  riff_chunk_ID[1] = 'I';
-  riff_chunk_ID[2] = 'F';
-  riff_chunk_ID[3] = 'F';
-  riff_chunk_size = 36 + pcm->length * 2;
-  riff_form_type[0] = 'W';
-  riff_form_type[1] = 'A';
-  riff_form_type[2] = 'V';
-  riff_form_type[3] = 'E';
-  
-  fmt_chunk_ID[0] = 'f';
-  fmt_chunk_ID[1] = 'm';
-  fmt_chunk_ID[2] = 't';
-  fmt_chunk_ID[3] = ' ';
-  fmt_chunk_size = 16;
-  fmt_wave_format_type = 1;
-  fmt_channel = 1;
-  fmt_samples_per_sec = pcm->fs; /* •W–{‰»ü”g” */
-  fmt_bytes_per_sec = pcm->fs * pcm->bits / 8;
-  fmt_block_size = pcm->bits / 8;
-  fmt_bits_per_sample = pcm->bits; /* —Êq‰»¸“x */
-  
-  data_chunk_ID[0] = 'd';
-  data_chunk_ID[1] = 'a';
-  data_chunk_ID[2] = 't';
-  data_chunk_ID[3] = 'a';
-  data_chunk_size = pcm->length * 2;
-  
-  fp = fopen(file_name, "wb");
-  
-  fwrite(riff_chunk_ID, 1, 4, fp);
-  fwrite(&riff_chunk_size, 4, 1, fp);
-  fwrite(riff_form_type, 1, 4, fp);
-  fwrite(fmt_chunk_ID, 1, 4, fp);
-  fwrite(&fmt_chunk_size, 4, 1, fp);
-  fwrite(&fmt_wave_format_type, 2, 1, fp);
-  fwrite(&fmt_channel, 2, 1, fp);
-  fwrite(&fmt_samples_per_sec, 4, 1, fp);
-  fwrite(&fmt_bytes_per_sec, 4, 1, fp);
-  fwrite(&fmt_block_size, 2, 1, fp);
-  fwrite(&fmt_bits_per_sample, 2, 1, fp);
-  fwrite(data_chunk_ID, 1, 4, fp);
-  fwrite(&data_chunk_size, 4, 1, fp);
-  
-  for (n = 0; n < pcm->length; n++)
-  {
-    s = (pcm->s[n] + 1.0) / 2.0 * 65536.0;
-    
-    if (s > 65535.0)
-    {
-      s = 65535.0; /* ƒNƒŠƒbƒsƒ“ƒO */
-    }
-    else if (s < 0.0)
-    {
-      s = 0.0; /* ƒNƒŠƒbƒsƒ“ƒO */
-    }
-    
-    data = (short)(s + 0.5) - 32768; /* lÌŒÜ“ü‚ÆƒIƒtƒZƒbƒg‚Ì’²ß */
-    fwrite(&data, 2, 1, fp); /* ‰¹ƒf[ƒ^‚Ì‘‚«o‚µ */
-  }
-  
-  fclose(fp);
+	FILE *fp;
+	int n;
+	char riff_chunk_ID[4];
+	long riff_chunk_size;
+	char riff_form_type[4];
+	char fmt_chunk_ID[4];
+	long fmt_chunk_size;
+	short fmt_wave_format_type;
+	short fmt_channel;
+	long fmt_samples_per_sec;
+	long fmt_bytes_per_sec;
+	short fmt_block_size;
+	short fmt_bits_per_sample;
+	char data_chunk_ID[4];
+	long data_chunk_size;
+	short data;
+	double s;
+
+	riff_chunk_ID[0] = 'R';
+	riff_chunk_ID[1] = 'I';
+	riff_chunk_ID[2] = 'F';
+	riff_chunk_ID[3] = 'F';
+	riff_chunk_size = 36 + pcm->length * 2;
+	riff_form_type[0] = 'W';
+	riff_form_type[1] = 'A';
+	riff_form_type[2] = 'V';
+	riff_form_type[3] = 'E';
+
+	fmt_chunk_ID[0] = 'f';
+	fmt_chunk_ID[1] = 'm';
+	fmt_chunk_ID[2] = 't';
+	fmt_chunk_ID[3] = ' ';
+	fmt_chunk_size = 16;
+	fmt_wave_format_type = 1;
+	fmt_channel = 1;
+	fmt_samples_per_sec = pcm->fs; /* ï¿½Wï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ */
+	fmt_bytes_per_sec = pcm->fs * pcm->bits / 8;
+	fmt_block_size = pcm->bits / 8;
+	fmt_bits_per_sample = pcm->bits; /* ï¿½Êqï¿½ï¿½ï¿½ï¿½ï¿½x */
+
+	data_chunk_ID[0] = 'd';
+	data_chunk_ID[1] = 'a';
+	data_chunk_ID[2] = 't';
+	data_chunk_ID[3] = 'a';
+	data_chunk_size = pcm->length * 2;
+
+	fp = fopen(file_name, "wb");
+
+	fwrite(riff_chunk_ID, 1, 4, fp);
+	fwrite(&riff_chunk_size, 4, 1, fp);
+	fwrite(riff_form_type, 1, 4, fp);
+	fwrite(fmt_chunk_ID, 1, 4, fp);
+	fwrite(&fmt_chunk_size, 4, 1, fp);
+	fwrite(&fmt_wave_format_type, 2, 1, fp);
+	fwrite(&fmt_channel, 2, 1, fp);
+	fwrite(&fmt_samples_per_sec, 4, 1, fp);
+	fwrite(&fmt_bytes_per_sec, 4, 1, fp);
+	fwrite(&fmt_block_size, 2, 1, fp);
+	fwrite(&fmt_bits_per_sample, 2, 1, fp);
+	fwrite(data_chunk_ID, 1, 4, fp);
+	fwrite(&data_chunk_size, 4, 1, fp);
+
+	for (n = 0; n < pcm->length; n++)
+	{
+	  s = (pcm->s[n] + 1.0) / 2.0 * 65536.0;
+
+	  if (s > 65535.0)
+	  {
+	    s = 65535.0; /* ï¿½Nï¿½ï¿½ï¿½bï¿½sï¿½ï¿½ï¿½O */
+	  }
+	  else if (s < 0.0)
+	  {
+	    s = 0.0; /* ï¿½Nï¿½ï¿½ï¿½bï¿½sï¿½ï¿½ï¿½O */
+	  }
+
+	  data = (short)(s + 0.5) - 32768; /* ï¿½lï¿½ÌŒÜ“ï¿½ï¿½ÆƒIï¿½tï¿½Zï¿½bï¿½gï¿½Ì’ï¿½ï¿½ï¿½ */
+	  fwrite(&data, 2, 1, fp); /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ìï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ */
+	}
+
+	fclose(fp);
 }
 
 void stereo_wave_read(STEREO_PCM *pcm, char *file_name)
 {
-  FILE *fp;
-  int n;
-  char riff_chunk_ID[4];
-  long riff_chunk_size;
-  char riff_form_type[4];
-  char fmt_chunk_ID[4];
-  long fmt_chunk_size;
-  short fmt_wave_format_type;
-  short fmt_channel;
-  long fmt_samples_per_sec;
-  long fmt_bytes_per_sec;
-  short fmt_block_size;
-  short fmt_bits_per_sample;
-  char data_chunk_ID[4];
-  long data_chunk_size;
-  short data;
-  
-  fp = fopen(file_name, "rb");
-  
-  fread(riff_chunk_ID, 1, 4, fp);
-  fread(&riff_chunk_size, 4, 1, fp);
-  fread(riff_form_type, 1, 4, fp);
-  fread(fmt_chunk_ID, 1, 4, fp);
-  fread(&fmt_chunk_size, 4, 1, fp);
-  fread(&fmt_wave_format_type, 2, 1, fp);
-  fread(&fmt_channel, 2, 1, fp);
-  fread(&fmt_samples_per_sec, 4, 1, fp);
-  fread(&fmt_bytes_per_sec, 4, 1, fp);
-  fread(&fmt_block_size, 2, 1, fp);
-  fread(&fmt_bits_per_sample, 2, 1, fp);
-  fread(data_chunk_ID, 1, 4, fp);
-  fread(&data_chunk_size, 4, 1, fp);
-  
-  pcm->fs = fmt_samples_per_sec; /* •W–{‰»ü”g” */
-  pcm->bits = fmt_bits_per_sample; /* —Êq‰»¸“x */
-  pcm->length = data_chunk_size / 4; /* ‰¹ƒf[ƒ^‚Ì’·‚³ */
-  pcm->sL = calloc(pcm->length, sizeof(double)); /* ƒƒ‚ƒŠ‚ÌŠm•Û */
-  pcm->sR = calloc(pcm->length, sizeof(double)); /* ƒƒ‚ƒŠ‚ÌŠm•Û */
-  
-  for (n = 0; n < pcm->length; n++)
-  {
-    fread(&data, 2, 1, fp); /* ‰¹ƒf[ƒ^iLƒ`ƒƒƒ“ƒlƒ‹j‚Ì“Ç‚İæ‚è */
-    pcm->sL[n] = (double)data / 32768.0; /* ‰¹ƒf[ƒ^‚ğ-1ˆÈã1–¢–‚Ì”ÍˆÍ‚É³‹K‰»‚·‚é */
-    
-    fread(&data, 2, 1, fp); /* ‰¹ƒf[ƒ^iRƒ`ƒƒƒ“ƒlƒ‹j‚Ì“Ç‚İæ‚è */
-    pcm->sR[n] = (double)data / 32768.0; /* ‰¹ƒf[ƒ^‚ğ-1ˆÈã1–¢–‚Ì”ÍˆÍ‚É³‹K‰»‚·‚é */
-  }
-  
-  fclose(fp);
+	FILE *fp;
+	int n;
+	char riff_chunk_ID[4];
+	long riff_chunk_size;
+	char riff_form_type[4];
+	char fmt_chunk_ID[4];
+	long fmt_chunk_size;
+	short fmt_wave_format_type;
+	short fmt_channel;
+	long fmt_samples_per_sec;
+	long fmt_bytes_per_sec;
+	short fmt_block_size;
+	short fmt_bits_per_sample;
+	char data_chunk_ID[4];
+	long data_chunk_size;
+	short data;
+
+	fp = fopen(file_name, "rb");
+
+	fread(riff_chunk_ID, 1, 4, fp);
+	fread(&riff_chunk_size, 4, 1, fp);
+	fread(riff_form_type, 1, 4, fp);
+	fread(fmt_chunk_ID, 1, 4, fp);
+	fread(&fmt_chunk_size, 4, 1, fp);
+	fread(&fmt_wave_format_type, 2, 1, fp);
+	fread(&fmt_channel, 2, 1, fp);
+	fread(&fmt_samples_per_sec, 4, 1, fp);
+	fread(&fmt_bytes_per_sec, 4, 1, fp);
+	fread(&fmt_block_size, 2, 1, fp);
+	fread(&fmt_bits_per_sample, 2, 1, fp);
+	fread(data_chunk_ID, 1, 4, fp);
+	fread(&data_chunk_size, 4, 1, fp);
+
+	pcm->fs = fmt_samples_per_sec; /* ï¿½Wï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ */
+	pcm->bits = fmt_bits_per_sample; /* ï¿½Êqï¿½ï¿½ï¿½ï¿½ï¿½x */
+	pcm->length = data_chunk_size / 4; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ì’ï¿½ï¿½ï¿½ */
+	pcm->sL = calloc(pcm->length, sizeof(double)); /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌŠmï¿½ï¿½ */
+	pcm->sR = calloc(pcm->length, sizeof(double)); /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌŠmï¿½ï¿½ */
+
+	for (n = 0; n < pcm->length; n++)
+	{
+	  fread(&data, 2, 1, fp); /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iLï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½jï¿½Ì“Ç‚İï¿½ï¿½ */
+	  pcm->sL[n] = (double)data / 32768.0; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½-1ï¿½Èï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½Ì”ÍˆÍ‚Éï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+
+	  fread(&data, 2, 1, fp); /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iRï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½jï¿½Ì“Ç‚İï¿½ï¿½ */
+	  pcm->sR[n] = (double)data / 32768.0; /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½-1ï¿½Èï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½Ì”ÍˆÍ‚Éï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	}
+
+	fclose(fp);
 }
 
 void stereo_wave_write(STEREO_PCM *pcm, char *file_name)
 {
-  FILE *fp;
-  int n;
-  char riff_chunk_ID[4];
-  long riff_chunk_size;
-  char riff_form_type[4];
-  char fmt_chunk_ID[4];
-  long fmt_chunk_size;
-  short fmt_wave_format_type;
-  short fmt_channel;
-  long fmt_samples_per_sec;
-  long fmt_bytes_per_sec;
-  short fmt_block_size;
-  short fmt_bits_per_sample;
-  char data_chunk_ID[4];
-  long data_chunk_size;
-  short data;
-  double s;
-  
-  riff_chunk_ID[0] = 'R';
-  riff_chunk_ID[1] = 'I';
-  riff_chunk_ID[2] = 'F';
-  riff_chunk_ID[3] = 'F';
-  riff_chunk_size = 36 + pcm->length * 4;
-  riff_form_type[0] = 'W';
-  riff_form_type[1] = 'A';
-  riff_form_type[2] = 'V';
-  riff_form_type[3] = 'E';
-  
-  fmt_chunk_ID[0] = 'f';
-  fmt_chunk_ID[1] = 'm';
-  fmt_chunk_ID[2] = 't';
-  fmt_chunk_ID[3] = ' ';
-  fmt_chunk_size = 16;
-  fmt_wave_format_type = 1;
-  fmt_channel = 2;
-  fmt_samples_per_sec = pcm->fs; /* •W–{‰»ü”g” */
-  fmt_bytes_per_sec = pcm->fs * pcm->bits / 8 * 2;
-  fmt_block_size = pcm->bits / 8 * 2;
-  fmt_bits_per_sample = pcm->bits; /* —Êq‰»¸“x */
-  
-  data_chunk_ID[0] = 'd';
-  data_chunk_ID[1] = 'a';
-  data_chunk_ID[2] = 't';
-  data_chunk_ID[3] = 'a';
-  data_chunk_size = pcm->length * 4;
-  
-  fp = fopen(file_name, "wb");
-  
-  fwrite(riff_chunk_ID, 1, 4, fp);
-  fwrite(&riff_chunk_size, 4, 1, fp);
-  fwrite(riff_form_type, 1, 4, fp);
-  fwrite(fmt_chunk_ID, 1, 4, fp);
-  fwrite(&fmt_chunk_size, 4, 1, fp);
-  fwrite(&fmt_wave_format_type, 2, 1, fp);
-  fwrite(&fmt_channel, 2, 1, fp);
-  fwrite(&fmt_samples_per_sec, 4, 1, fp);
-  fwrite(&fmt_bytes_per_sec, 4, 1, fp);
-  fwrite(&fmt_block_size, 2, 1, fp);
-  fwrite(&fmt_bits_per_sample, 2, 1, fp);
-  fwrite(data_chunk_ID, 1, 4, fp);
-  fwrite(&data_chunk_size, 4, 1, fp);
-  
-  for (n = 0; n < pcm->length; n++)
-  {
-    s = (pcm->sL[n] + 1.0) / 2.0 * 65536.0;
-    
-    if (s > 65535.0)
-    {
-      s = 65535.0; /* ƒNƒŠƒbƒsƒ“ƒO */
-    }
-    else if (s < 0.0)
-    {
-      s = 0.0; /* ƒNƒŠƒbƒsƒ“ƒO */
-    }
-    
-    data = (short)(s + 0.5) - 32768; /* lÌŒÜ“ü‚ÆƒIƒtƒZƒbƒg‚Ì’²ß */
-    fwrite(&data, 2, 1, fp); /* ‰¹ƒf[ƒ^iLƒ`ƒƒƒ“ƒlƒ‹j‚Ì‘‚«o‚µ */
-    
-    s = (pcm->sR[n] + 1.0) / 2.0 * 65536.0;
-    
-    if (s > 65535.0)
-    {
-      s = 65535.0; /* ƒNƒŠƒbƒsƒ“ƒO */
-    }
-    else if (s < 0.0)
-    {
-      s = 0.0; /* ƒNƒŠƒbƒsƒ“ƒO */
-    }
-    
-    data = (short)(s + 0.5) - 32768; /* lÌŒÜ“ü‚ÆƒIƒtƒZƒbƒg‚Ì’²ß */
-    fwrite(&data, 2, 1, fp); /* ‰¹ƒf[ƒ^iRƒ`ƒƒƒ“ƒlƒ‹j‚Ì‘‚«o‚µ */
-  }
-  
-  fclose(fp);
+	FILE *fp;
+	int n;
+	char riff_chunk_ID[4];
+	long riff_chunk_size;
+	char riff_form_type[4];
+	char fmt_chunk_ID[4];
+	long fmt_chunk_size;
+	short fmt_wave_format_type;
+	short fmt_channel;
+	long fmt_samples_per_sec;
+	long fmt_bytes_per_sec;
+	short fmt_block_size;
+	short fmt_bits_per_sample;
+	char data_chunk_ID[4];
+	long data_chunk_size;
+	short data;
+	double s;
+
+	riff_chunk_ID[0] = 'R';
+	riff_chunk_ID[1] = 'I';
+	riff_chunk_ID[2] = 'F';
+	riff_chunk_ID[3] = 'F';
+	riff_chunk_size = 36 + pcm->length * 4;
+	riff_form_type[0] = 'W';
+	riff_form_type[1] = 'A';
+	riff_form_type[2] = 'V';
+	riff_form_type[3] = 'E';
+
+	fmt_chunk_ID[0] = 'f';
+	fmt_chunk_ID[1] = 'm';
+	fmt_chunk_ID[2] = 't';
+	fmt_chunk_ID[3] = ' ';
+	fmt_chunk_size = 16;
+	fmt_wave_format_type = 1;
+	fmt_channel = 2;
+	fmt_samples_per_sec = pcm->fs; /* ï¿½Wï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ */
+	fmt_bytes_per_sec = pcm->fs * pcm->bits / 8 * 2;
+	fmt_block_size = pcm->bits / 8 * 2;
+	fmt_bits_per_sample = pcm->bits; /* ï¿½Êqï¿½ï¿½ï¿½ï¿½ï¿½x */
+
+	data_chunk_ID[0] = 'd';
+	data_chunk_ID[1] = 'a';
+	data_chunk_ID[2] = 't';
+	data_chunk_ID[3] = 'a';
+	data_chunk_size = pcm->length * 4;
+
+	fp = fopen(file_name, "wb");
+
+	fwrite(riff_chunk_ID, 1, 4, fp);
+	fwrite(&riff_chunk_size, 4, 1, fp);
+	fwrite(riff_form_type, 1, 4, fp);
+	fwrite(fmt_chunk_ID, 1, 4, fp);
+	fwrite(&fmt_chunk_size, 4, 1, fp);
+	fwrite(&fmt_wave_format_type, 2, 1, fp);
+	fwrite(&fmt_channel, 2, 1, fp);
+	fwrite(&fmt_samples_per_sec, 4, 1, fp);
+	fwrite(&fmt_bytes_per_sec, 4, 1, fp);
+	fwrite(&fmt_block_size, 2, 1, fp);
+	fwrite(&fmt_bits_per_sample, 2, 1, fp);
+	fwrite(data_chunk_ID, 1, 4, fp);
+	fwrite(&data_chunk_size, 4, 1, fp);
+
+	for (n = 0; n < pcm->length; n++)
+	{
+	  s = (pcm->sL[n] + 1.0) / 2.0 * 65536.0;
+
+	  if (s > 65535.0)
+	  {
+	    s = 65535.0; /* ï¿½Nï¿½ï¿½ï¿½bï¿½sï¿½ï¿½ï¿½O */
+	  }
+	  else if (s < 0.0)
+	  {
+	    s = 0.0; /* ï¿½Nï¿½ï¿½ï¿½bï¿½sï¿½ï¿½ï¿½O */
+	  }
+
+	  data = (short)(s + 0.5) - 32768; /* ï¿½lï¿½ÌŒÜ“ï¿½ï¿½ÆƒIï¿½tï¿½Zï¿½bï¿½gï¿½Ì’ï¿½ï¿½ï¿½ */
+	  fwrite(&data, 2, 1, fp); /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iLï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½jï¿½Ìï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ */
+
+	  s = (pcm->sR[n] + 1.0) / 2.0 * 65536.0;
+
+	  if (s > 65535.0)
+	  {
+	    s = 65535.0; /* ï¿½Nï¿½ï¿½ï¿½bï¿½sï¿½ï¿½ï¿½O */
+	  }
+	  else if (s < 0.0)
+	  {
+	    s = 0.0; /* ï¿½Nï¿½ï¿½ï¿½bï¿½sï¿½ï¿½ï¿½O */
+	  }
+
+	  data = (short)(s + 0.5) - 32768; /* ï¿½lï¿½ÌŒÜ“ï¿½ï¿½ÆƒIï¿½tï¿½Zï¿½bï¿½gï¿½Ì’ï¿½ï¿½ï¿½ */
+	  fwrite(&data, 2, 1, fp); /* ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½iRï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½jï¿½Ìï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ */
+	}
+
+	fclose(fp);
 }

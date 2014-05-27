@@ -28,22 +28,25 @@ const char *LOG_FILE_PATH = "./log/exec_log.txt";
 void show_help(void)
 {
     char *msg = "<Usage>\n"
-    "\tpngtoppm src1 src2 dst\n"
+    "Learn_Sound_Eclipse_W.exe -app gen-ppm "
+	"-dst images\\test.ppm -size 255,255 -bright 255 -bg red"
     "\n"
-    "<Options>\n"
-    "\t-bg\t background color\n"
-    "\t\tred, green, blue, purple, white, black"
-    "\t-direc\n"
-    "\t\tverti, hori\n"
-    
-    "\t-proc\n"
-    "\t\tProcess png pixels\n"
-    
-    "\t-rgb\n"
-    "\t\tRGB values for \"-proc\" mode\n"
-    "\t\te.g. 100,20,50 (R,G,B)\n"
-    "\t\te.g. ./dist/Debug/GNU-Linux-x86/pngtoppm\n"
-    "\t\t\t-src images/XXX -dst images/YYY -proc -rgb 100,20,20\n"
+
+	"<Options>\n"
+    "\t-bg\t"
+    		"background color\n"
+    		"\t\tred, green, blue, purple, white, black, gray"
+
+    "\n"
+
+    "\t-dst\t"
+    		"dst file name\n"
+    		"\t\te.g. images\\test.ppm"
+
+    "\t-bright\t"
+    		"max brightness in the ppm file\n"
+    		"If not given, the value is set to the default of 255\n"
+    		"\t\te.g. 255"
     ;
 
 
@@ -183,8 +186,8 @@ void write_Log
 
 char *get_Opt_Value(char **argv, const char *opt)
 {
-	//log
-	printf("[%s : %d] Starting => get_Opt_Value()\n", base_name(__FILE__), __LINE__);
+//	//log
+//	printf("[%s : %d] Starting => get_Opt_Value()\n", base_name(__FILE__), __LINE__);
 
 
     char *opt_val;
@@ -194,9 +197,9 @@ char *get_Opt_Value(char **argv, const char *opt)
 
     while(*(argv + i) != NULL) {
 
-    	//log
-		printf("[%s : %d] *(argv + i) => %s\n",
-				base_name(__FILE__), __LINE__, *(argv + i));
+//    	//log
+//		printf("[%s : %d] *(argv + i) => %s\n",
+//				base_name(__FILE__), __LINE__, *(argv + i));
 
 
         if(!strcmp(*(argv + i), opt)) {
@@ -228,6 +231,13 @@ char *get_Opt_Value(char **argv, const char *opt)
 
                 consolColor_Reset();
 
+                consolColor_Change(GREEN);
+
+                show_help();
+
+				consolColor_Reset();
+
+
                 exit(-1);
 
             }
@@ -248,6 +258,12 @@ char *get_Opt_Value(char **argv, const char *opt)
 //        printf("option => not given\n");
 
         consolColor_Reset();
+
+        consolColor_Change(GREEN);
+
+		show_help();
+
+		consolColor_Reset();
 
         exit(-1);
 

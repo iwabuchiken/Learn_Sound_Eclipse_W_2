@@ -114,9 +114,11 @@ int main(int argc, char** argv) {
 
 #endif
 	//log
-	printf("[%s : %d] done\n", base_name(__FILE__), __LINE__);
+	printf("[%s : %d] done", base_name(__FILE__), __LINE__);
 
 	consolColor_Reset();
+
+	printf("\n");
 
 	return 0;
 

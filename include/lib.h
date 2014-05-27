@@ -5,7 +5,7 @@
  * Created on 2014/05/06, 13:26
  */
 
-#define UBUNTU
+//#define UBUNTU
 
 #ifndef LIB_H
 #define	LIB_H
@@ -235,6 +235,8 @@ char *join_simple(char **, int num);
 char *get_TimeLabel_Now(TimeLabelType);
 
 int get_max_element(int *, int);
+
+void init_ConsoleColors(void);
 
 #ifdef	__cplusplus
 }

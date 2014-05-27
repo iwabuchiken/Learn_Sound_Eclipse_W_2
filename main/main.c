@@ -12,21 +12,45 @@
 #include "../include/wave.h"
 #endif
 
-#ifndef IMG_LIB_H
-#include "../include/img_lib.h"
+//#ifndef IMG_LIB_H
+//#include "../include/img_lib.h"
+//#endif
+
+#ifndef METHODS_H
+#include "../include/methods.h"
 #endif
 
-/*********************************
- * Prototypes
-**********************************/
-void _test_FirstProg(void);
+/////////////////////////////////////
 
+// Prototypes
+
+/////////////////////////////////////
+void _test_FirstProg(void);
+void dispather(int, char**);
+
+/////////////////////////////////////
+
+// main()
+
+/////////////////////////////////////
 int main(int argc, char** argv) {
 
-	PPM ppm;
-	PGM pgm;
+	/*********************************
+	 * Initial setups
+	**********************************/
+	log_Command_Input(argc, argv);
+#ifndef UBUNTU
+	init_ConsoleColors();
+#endif
+	/*********************************
+	 * Dispatch
+	**********************************/
+	dispather(argc, argv);
 
-	_test_FirstProg();
+//	PPM ppm;
+//	PGM pgm;
+//
+//	_test_FirstProg();
 
 //	MONO_PCM pcm0, pcm1;
 //	int n;
@@ -65,10 +89,15 @@ int main(int argc, char** argv) {
 //	free(pcm0.s); /* メモリの解放 */
 //	free(pcm1.s); /* メモリの解放 */
 
+#ifndef UBUNTU
 
+	consolColor_Change(0, 0x0f);
+
+#endif
 	//log
 	printf("[%s : %d] done\n", base_name(__FILE__), __LINE__);
 
+	consolColor_Reset();
 
 	return 0;
 
@@ -112,5 +141,10 @@ void _test_FirstProg()
 
 	free(pcm0.s); /* メモリの解放 */
 	free(pcm1.s); /* メモリの解放 */
+
+}
+
+void dispather(int argc, char** argv)
+{
 
 }

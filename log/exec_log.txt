@@ -1,0 +1,24 @@
+[2014:05:27 10:28:17]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 10:33:43]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 10:39:01]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 10:39:35]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 10:43:07]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 10:46:26]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+

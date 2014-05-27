@@ -985,8 +985,10 @@ char *get_TimeLabel_Now(TimeLabelType type)
         time_label[19] = '\0';
         
     } else {
-        
+
+#ifdef UBUNTU
         consolColor_Change(RED);
+#endif
 
         //log
         printf("[%s : %d] Unknow time label type: %d\n",
@@ -1051,3 +1053,10 @@ int get_max_element(int *array, int num_of_elements)
     return tmp;
     
 }//int get_max_element(int *array, int num_of_elements)
+
+void init_ConsoleColors()
+{
+	console_textColor = textcolor();
+	console_backgroundColor = backcolor();
+
+}

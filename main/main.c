@@ -20,6 +20,20 @@
 #include "../include/methods.h"
 #endif
 
+#ifndef MAIN_H_
+#include "../include/main.h"
+#endif
+
+/////////////////////////////////////
+
+// vars
+
+/////////////////////////////////////
+const char *app_names[] = {
+		"gen-ppm"
+
+};
+
 /////////////////////////////////////
 
 // Prototypes
@@ -35,6 +49,11 @@ void dispather(int, char**);
 /////////////////////////////////////
 int main(int argc, char** argv) {
 
+	//log
+	printf("[%s : %d] main()\n", base_name(__FILE__), __LINE__);
+	printf("[%s : %d] argc = %d\n", base_name(__FILE__), __LINE__, argc);
+
+
 	/*********************************
 	 * Initial setups
 	**********************************/
@@ -42,9 +61,9 @@ int main(int argc, char** argv) {
 #ifndef UBUNTU
 	init_ConsoleColors();
 #endif
-	/*********************************
-	 * Dispatch
-	**********************************/
+//	/*********************************
+//	 * Dispatch
+//	**********************************/
 	dispather(argc, argv);
 
 //	PPM ppm;
@@ -146,5 +165,46 @@ void _test_FirstProg()
 
 void dispather(int argc, char** argv)
 {
+	//log
+	printf("[%s : %d] Starting => dispather()\n", base_name(__FILE__), __LINE__);
+
+	/*********************************
+	 * Get: opt value for '-app'
+	**********************************/
+	//test
+	char *test_str = (char *) join(',', argv, argc);
+	//log
+	printf("[%s : %d] test_str => %s\n",
+			base_name(__FILE__), __LINE__, test_str);
+
+
+	const char *opt_string = "-app";
+
+	char *opt_val = (char *) get_Opt_Value(argv, opt_string);
+
+	consolColor_Change(GREEN);
+
+	//log
+	printf("[%s : %d] opt_val for '%s' => %s\n",
+			base_name(__FILE__), __LINE__, opt_string, opt_val);
+
+	consolColor_Reset();
+
+	/*********************************
+	 * Dispatch
+	**********************************/
+	//log
+	printf("[%s : %d] app_names[0] => %s\n",
+			(char *) base_name(__FILE__), __LINE__, app_names[0]);
+
+
+	if (!strcmp(opt_val, app_names[0])) {	// "gen-ppm"
+
+		Gen_PPM(argc, argv);
+
+	} else {
+
+	}
+
 
 }

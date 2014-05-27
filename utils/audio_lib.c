@@ -2,6 +2,17 @@
 #include "../include/audio_lib.h"
 #endif
 
+#ifndef STRING_H
+#define STRING_H
+#include <string.h>
+#endif
+
+#ifndef LIB_H
+#define	LIB_H
+#include "lib.h"
+#endif
+
+
 /********************************
     get_Src_Path(char **argv, char *current_dir)
  * 
@@ -42,16 +53,19 @@ char *get_Src_Path(char **argv, char *current_dir)
     }
 
     
-    printf("[%s : %d] *(argv + increment) =>\n");
-    printf("[%s : %d] %s\n", 
-            base_name(__FILE__), __LINE__, *(argv + increment));
+    printf("[%s : %d] *(argv + increment) => %s\n",
+    		(char *) base_name(__FILE__), __LINE__, *(argv + increment));
+
+//    printf("[%s : %d] *(argv + increment) => %s\n");
+//    printf("[%s : %d] %s\n",
+//            base_name(__FILE__), __LINE__, *(argv + increment));
 
     
     // Inspect args
     while(*(argv + increment) != NULL) {
 
         printf("[%s : %d] *(argv + increment) => %s\n", 
-                base_name(__FILE__), __LINE__, *(argv + increment));
+                (char *) base_name(__FILE__), __LINE__, *(argv + increment));
 
         
 	int res = strcmp(*(argv + increment), opt_SrcFile);

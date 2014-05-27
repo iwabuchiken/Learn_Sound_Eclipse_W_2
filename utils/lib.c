@@ -717,11 +717,21 @@ char *join(char joint, char **array, int num_of_elems)
      **************************/
     if(num_of_elems == 2) {
         
-        char *joint_str[2];
+//        char *joint_str = (char *) malloc(sizeof(char) * 2);
+//        char *joint_str[2];
+        char joint_str[2];
         
+//        *joint_str[0] = joint;
         joint_str[0] = joint;
+//        joint_str[0] = (char *) joint;
         joint_str[1] = '\0';
+//        joint_str[1] = '\0';
         
+        //log
+		printf("[%s : %d] joint_str => \"%s\"\n",
+				base_name(__FILE__), __LINE__, joint_str);
+
+
         int len = strlen(array[0]) + strlen(array[1]) + sizeof(joint_str);
         
         char *new_string = (char *) malloc(sizeof(char) * (len + 1));
@@ -731,6 +741,11 @@ char *join(char joint, char **array, int num_of_elems)
         
         new_string[len] = '\0';
         
+        //log
+		printf("[%s : %d] new_string => %s\n",
+				base_name(__FILE__), __LINE__, new_string);
+
+
         return new_string;
         
     }
@@ -741,16 +756,21 @@ char *join(char joint, char **array, int num_of_elems)
     if(num_of_elems >= 3) {
 //    if(num_of_elems == 3) {
         
-        char *joint_str[2];
+//        char *joint_str = (char *) malloc(sizeof(char) * 2);
+//        char *joint_str[2];
+        char joint_str[2];
         
+//        *joint_str[0] = joint;
         joint_str[0] = joint;
         joint_str[1] = '\0';
         
-        int len = strlen(array[0]) + strlen(array[1]) + sizeof(joint_str);
+        int len = strlen(array[0]) + strlen(array[1]) + strlen(joint_str);
+//        int len = strlen(array[0]) + strlen(array[1]) + sizeof(joint_str);
         
         char *new_string = (char *) malloc(sizeof(char) * (len + 1));
         
         new_string = (char *) concat3(array[0], joint_str, array[1]);
+//        new_string = (char *) concat3(array[0], joint_str, array[1]);
         
 //        //log
 //        printf("[%s : %d] new_string => %s\n", 
@@ -785,7 +805,8 @@ char *join(char joint, char **array, int num_of_elems)
 //                    base_name(__FILE__), __LINE__, array[i]);
 
             
-            len = strlen(tmp) + strlen(array[i]) + joint_str;
+            len = strlen(tmp) + strlen(array[i]) + strlen(joint_str);
+//            len = strlen(tmp) + strlen(array[i]) + joint_str;
             
 //            //log
 //            printf("[%s : %d] joint_str => %s\n", 
@@ -834,6 +855,8 @@ char *join(char joint, char **array, int num_of_elems)
         
     }//if(num_of_elems == 3)
     
+    return NULL;
+
 }//char *join(char joint, char **array, int num_of_elems)
 
 /**************************
@@ -890,7 +913,7 @@ char *join_simple(char **array, int num_of_elems)
         
         for(i = 2; i < num_of_elems; i++) {
             
-            int len = sizeof(new_string);
+//            int len = sizeof(new_string);
             
 //            char *tmp = (char *) malloc(len + 1);
 //            
@@ -918,6 +941,8 @@ char *join_simple(char **array, int num_of_elems)
         
     }//if(num_of_elems == 3)
     
+    return NULL;
+
 }//char *join(char joint, char **array, int num_of_elems)
 
 char *get_TimeLabel_Now(TimeLabelType type)
@@ -942,7 +967,7 @@ char *get_TimeLabel_Now(TimeLabelType type)
     
     //REF setlocale http://en.cppreference.com/w/cpp/locale/setlocale
 //    char *loc = setlocale(LC_TIME, "en_GB");
-    char *loc = setlocale(LC_TIME, "ja_JP");
+//    char *loc = setlocale(LC_TIME, "ja_JP");
 //    char *loc = setlocale(LC_ALL, "");
 //    char *loc = setlocale(LC_ALL, "ja_JP");
     
@@ -980,7 +1005,8 @@ char *get_TimeLabel_Now(TimeLabelType type)
         
 //        itoa(rawtime, time_label);
 //        itoa(rawtime, time_label, 10);
-        sprintf(time_label, "%d", rawtime);
+        sprintf(time_label, "%d", (int) rawtime);
+//        sprintf(time_label, "%d", rawtime);
         
         time_label[19] = '\0';
         
@@ -1034,9 +1060,9 @@ int get_max_element(int *array, int num_of_elements)
     /**************************
      * Validation
      **************************/
-    if(array == NULL) return NULL;
-    if(num_of_elements == NULL
-            || num_of_elements < 1) return NULL;
+    if(array == NULL) return (int) NULL;
+    if(num_of_elements == (int) NULL
+            || num_of_elements < 1) return (int) NULL;
 
     /**************************
      * vars
@@ -1060,3 +1086,34 @@ void init_ConsoleColors()
 	console_backgroundColor = backcolor();
 
 }
+
+/*********************************
+ * int _Option_Exists(char **argv, int argc, char *opt_string)
+ *
+ * @return
+ * 		true => the option exists in the arguement
+ * 		false => the option does not exist in the arguement
+**********************************/
+int option_Exists(char **argv, int argc, char *opt_string)
+{
+    int i;
+
+//    argv ++;
+
+    for (i = 0; i < argc; i++) {
+
+        if(!strcmp(*(argv + i), opt_string)) {
+//        if(!strcmp(*(argv + i), "-proc")) {
+
+            return true;
+
+        };
+
+    }
+
+    return false;
+
+
+}
+
+//char *

@@ -19,6 +19,13 @@ extern "C" {
 #define WIN_H
 #include <windows.h>
 #define std_con_out GetStdHandle(STD_OUTPUT_HANDLE)
+
+#define RED	console_backgroundColor, 0x0c
+#define GREEN	console_backgroundColor, 0x0a
+#define LIGHT_YELLOW	console_backgroundColor, 0x0e
+#define WHITE	console_backgroundColor, 0x0f
+#define BLACK	console_backgroundColor, 0x00
+
 #endif//#ifndef WIN_H
 
 #else//#ifndef UBUNTU
@@ -237,6 +244,8 @@ char *get_TimeLabel_Now(TimeLabelType);
 int get_max_element(int *, int);
 
 void init_ConsoleColors(void);
+
+int option_Exists(char **, int, char *);
 
 #ifdef	__cplusplus
 }

@@ -59,7 +59,7 @@ int _opt_RGB(char **argv, int *rgb[3])
 	char *rgb_values_string;
 	char **rgb_values_array;
 
-	int *rgb_values;
+//	int *rgb_values;
 
 	// Inspect args
 	while(*(argv + increment) != NULL) {
@@ -193,7 +193,7 @@ int validate_RGBStringFormat(char *string)
 
 	char delim = ',';
 
-	char **tokens = str_split_3(string, delim, &count);
+//	char **tokens = str_split_3(string, delim, &count);
 //	char **tokens = str_split_3(&string, delim, count);
 //	char **tokens = str_split_3(*string, delim, count);
 //	char **tokens = str_split_3(string, delim, count);
@@ -704,7 +704,7 @@ _opt_OverWrite_DstFile(char **argv)
 
 char * conv_DstFile_Name(char *image_file_dst, int *rgb[3])
 {
-    int len = strlen(image_file_dst);
+//    int len = strlen(image_file_dst);
     
     int num_of_tokens;
     
@@ -712,7 +712,8 @@ char * conv_DstFile_Name(char *image_file_dst, int *rgb[3])
     
     char rgb_string[15];
     
-    sprintf(rgb_string, "_rgb=%d,%d,%d", rgb[0], rgb[1], rgb[2]);
+    sprintf(rgb_string, "_rgb=%d,%d,%d", (int) rgb[0], (int) rgb[1], (int) rgb[2]);
+//    sprintf(rgb_string, "_rgb=%d,%d,%d", rgb[0], rgb[1], rgb[2]);
     
     char *tmp = concat3(*tokens, rgb_string, ".ppm");
     

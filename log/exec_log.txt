@@ -22,3 +22,75 @@ argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
 <argv>
 argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
 
+[2014:05:27 15:23:57]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 15:26:09]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 15:27:26]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 15:33:08]
+<argv>
+argc=2: .\Debug\Learn_Sound_Eclipse_W.exe -app
+
+[2014:05:27 15:43:04]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 15:43:36]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 15:44:02]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 15:47:02]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 15:48:25]
+<argv>
+argc=1: .\Debug\Learn_Sound_Eclipse_W.exe
+
+[2014:05:27 15:51:51]
+<argv>
+argc=2: .\Debug\Learn_Sound_Eclipse_W.exe -app
+
+[2014:05:27 15:52:48]
+<argv>
+argc=2: .\Debug\Learn_Sound_Eclipse_W.exe -app
+
+[2014:05:27 15:55:24]
+<argv>
+argc=2: .\Debug\Learn_Sound_Eclipse_W.exe -app
+
+[2014:05:27 15:55:49]
+<argv>
+argc=2: .\Debug\Learn_Sound_Eclipse_W.exe -app
+
+[2014:05:27 15:58:09]
+<argv>
+argc=3: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm
+
+[2014:05:27 15:59:57]
+<argv>
+argc=3: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm
+
+[2014:05:27 16:05:41]
+<argv>
+argc=3: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm
+
+[2014:05:27 16:06:44]
+<argv>
+argc=3: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm
+
+[2014:05:27 16:07:13]
+<argv>
+argc=3: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm
+

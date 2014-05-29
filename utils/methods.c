@@ -86,9 +86,9 @@ void log_Command_Input(int argc, char **argv)
     
     char *argv_str = join(joint, argv, argc);
     
-    //log
-	printf("[%s : %d] argv_str => %s\n",
-			base_name(__FILE__), __LINE__, argv_str);
+//    //log
+//	printf("[%s : %d] argv_str => %s\n",
+//			base_name(__FILE__), __LINE__, argv_str);
 
 
     FILE *fp;
@@ -96,9 +96,9 @@ void log_Command_Input(int argc, char **argv)
     /*********************************
 	 * File: open
 	**********************************/
-    //log
-	printf("[%s : %d] Opening file => %s\n",
-			base_name(__FILE__), __LINE__, LOG_FILE_PATH);
+//    //log
+//	printf("[%s : %d] Opening file => %s\n",
+//			base_name(__FILE__), __LINE__, LOG_FILE_PATH);
 
     if((fp = fopen(LOG_FILE_PATH, "a")) == NULL) {
         

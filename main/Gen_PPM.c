@@ -35,6 +35,7 @@ void _Setup_Options(int argc, char **argv);
 void _Setup_Options__Bright(char **argv);
 void _Setup_Options__Size(char **argv);
 void _Setup_Options__Bg(char **argv);
+void _Setup_Options__Dst(char **argv);
 
 void build_PPM_Header(void);
 void build_PPM_Pixels(void);

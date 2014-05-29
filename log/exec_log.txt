@@ -434,3 +434,19 @@ argc=4: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -dst
 <argv>
 argc=4: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -dst
 
+[2014:05:29 13:43:22]
+<argv>
+argc=4: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -dst
+
+[2014:05:29 13:43:29]
+<argv>
+argc=4: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src
+
+[2014:05:29 13:45:38]
+<argv>
+argc=4: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src
+
+[2014:05:29 13:48:14]
+<argv>
+argc=5: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav
+

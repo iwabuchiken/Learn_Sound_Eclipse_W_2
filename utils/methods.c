@@ -60,6 +60,8 @@ void show_help(void)
     //log
     printf("[%s : %d]\n%s\n", base_name(__FILE__), __LINE__, msg);
 
+    consolColor_Reset();
+
     /*********************************
 	 * Color names
 	**********************************/
@@ -71,8 +73,6 @@ void show_help(void)
 
 	printf("Available color names => %s\n", tmp_ch);
 
-    consolColor_Reset();
-    
 }
 
 void log_Command_Input(int argc, char **argv)

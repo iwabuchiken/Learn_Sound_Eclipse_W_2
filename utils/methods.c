@@ -52,6 +52,10 @@ void show_help(void)
     		"max brightness in the ppm file\n"
     		"If not given, the value is set to the default of 255\n"
     		"\t\te.g. 255"
+
+	"\t-save\t"
+    		"save a generate wave file\n"
+
     ;
 
 

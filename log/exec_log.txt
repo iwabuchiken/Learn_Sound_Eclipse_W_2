@@ -510,3 +510,111 @@ argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\
 <argv>
 argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
 
+[2014:05:29 15:21:41]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:22:37]
+<argv>
+argc=8: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav -save_file
+
+[2014:05:29 15:22:52]
+<argv>
+argc=8: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav -save
+
+[2014:05:29 15:23:41]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:23:46]
+<argv>
+argc=8: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav -save
+
+[2014:05:29 15:28:13]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:28:59]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:32:46]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:32:59]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:35:30]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:37:36]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\Come on and Stomp, Stomp, Stomp - Johnny Dodds.wav -dst audio\dodds.wav
+
+[2014:05:29 15:38:25]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\Come on and Stomp, Stomp, Stomp - Johnny Dodds.wav -dst audio\dodds.wav
+
+[2014:05:29 15:39:33]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\Come on and Stomp, Stomp, Stomp - Johnny Dodds.wav -dst audio\dodds.wav
+
+[2014:05:29 15:40:10]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\Come on and Stomp, Stomp, Stomp - Johnny Dodds.wav -dst audio\dodds.wav
+
+[2014:05:29 15:47:57]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\Come on and Stomp, Stomp, Stomp - Johnny Dodds.wav -dst audio\dodds.wav
+
+[2014:05:29 15:48:04]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:48:16]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav
+
+[2014:05:29 15:49:26]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav
+
+[2014:05:29 15:49:30]
+<argv>
+argc=8: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op
+
+[2014:05:29 15:49:36]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op abc
+
+[2014:05:29 15:50:01]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op abc
+
+[2014:05:29 15:50:17]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op abc
+
+[2014:05:29 15:51:32]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op abc
+
+[2014:05:29 15:51:34]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op abc
+
+[2014:05:29 15:51:35]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op abc
+
+[2014:05:29 15:51:35]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op abc
+
+[2014:05:29 15:51:36]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op abc
+

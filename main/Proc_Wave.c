@@ -44,11 +44,17 @@
 #include "../include/methods.h"
 #endif
 
+/////////////////////////////////////
+
+// global vars
+
+/////////////////////////////////////
+MONO_PCM pcm0, pcm1;
 
 
 void Proc_Wave(int argc, char **argv)
 {
-	MONO_PCM pcm0, pcm1;
+//	MONO_PCM pcm0, pcm1;
 	int n;
 
 	mono_wave_read(&pcm0, "./audio/a.wav"); /* WAVEファイルからモノラルの音データを入力する */

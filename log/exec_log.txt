@@ -430,3 +430,7 @@ argc=4: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -dst
 <argv>
 argc=4: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -dst
 
+[2014:05:29 13:35:34]
+<argv>
+argc=4: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -dst
+

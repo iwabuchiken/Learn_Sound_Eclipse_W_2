@@ -32,6 +32,7 @@
 /////////////////////////////////////
 void _Setup_Options(int argc, char **argv);
 void _Setup_Options__Bright(char **argv);
+void _Setup_Options__Size(char **argv);
 
 void build_PPM_Header(void);
 void build_PPM_Pixels(void);
@@ -106,25 +107,13 @@ void Gen_PPM(int argc, char **argv)
 void _Setup_Options(int argc, char **argv)
 {
 	/*********************************
-	 * Opt: dst
-	**********************************/
-	char *opt_key_Dst = "-dst";
-
-	ppm_file_dst = (char *) get_Opt_Value(argv, opt_key_Dst);
-
-	consolColor_Change(GREEN);
-	//log
-	printf("[%s : %d] ppm_file_dst => %s\n",
-			(char *) base_name(__FILE__), __LINE__, ppm_file_dst);
-
-	consolColor_Reset();
-
-	/*********************************
 	 * Opt: size
 	**********************************/
-	char *opt_key_Size = "-size";
+	_Setup_Options__Size(argv);
 
-	char *opt_val_Size = (char *) get_Opt_Value(argv, opt_key_Size);
+//	char *opt_key_Size = "-size";
+//
+//	char *opt_val_Size = (char *) get_Opt_Value(argv, opt_key_Size);
 
 	/*********************************
 	 * Opt: bright
@@ -173,6 +162,23 @@ void _Setup_Options(int argc, char **argv)
 ////
 ////	consolColor_Reset();
 
+	/*********************************
+	 * Opt: dst
+	**********************************/
+	char *opt_key_Dst = "-dst";
+
+	ppm_file_dst = (char *) get_Opt_Value(argv, opt_key_Dst);
+
+
+
+	consolColor_Change(GREEN);
+	//log
+	printf("[%s : %d] ppm_file_dst => %s\n",
+			(char *) base_name(__FILE__), __LINE__, ppm_file_dst);
+
+	consolColor_Reset();
+
+
 }
 
 void build_PPM_Header()
@@ -183,10 +189,10 @@ void build_PPM_Header()
 
 	ppm->format[2] = '\0';
 
-	ppm->x = 255;
-	ppm->y = 255;
+	ppm->x = ppm_size[0];
+	ppm->y = ppm_size[1];
 
-	ppm->max_brightness = 255;
+	ppm->max_brightness = max_bright;
 
 }
 
@@ -264,3 +270,86 @@ void _Setup_Options__Bright(char **argv) {
 //	consolColor_Reset();
 
 }
+
+void _Setup_Options__Size(char **argv)
+{
+
+	char *opt_key_Size = "-size";
+
+	char *opt_val_Size = (char *) get_Opt_Value(argv, opt_key_Size);
+
+	char delim = ',';
+
+	int position = 1; int *num_of_tokens;
+
+	char **tokens = (char **) str_split_r_2
+			(opt_val_Size, delim, position, &num_of_tokens);
+
+	int i;
+
+	for(i = 0; i < 2; i++) {
+
+		if(!is_Numeric(tokens[i])) {
+
+			consolColor_Change(RED);
+
+			//log
+			printf("[%s : %d] size is not numeric => (%s) : %s\n",
+						base_name(__FILE__), __LINE__,
+						tokens[i], (i == 0 ? "width" : "height"));
+
+			consolColor_Reset();
+
+			exit(-1);
+
+		} else {
+
+			ppm_size[i] = atoi(tokens[i]);
+
+			//log
+			printf("[%s : %d] size  => %d : %s\n",
+						base_name(__FILE__), __LINE__,
+						ppm_size[i], (i == 0 ? "width" : "height"));
+
+		}//if(!is_Numeric(tokens[i]))
+
+	}//for(i = 0; i < 2; i++)
+
+
+
+//	//log
+//	printf("[%s : %d] tokens[0] => %s\n", base_name(__FILE__), __LINE__, tokens[0]);
+
+
+//	consolColor_Change(GREEN);
+//
+//	if (is_Numeric(opt_val_Bright)) {
+//
+//		max_bright = atoi(opt_val_Bright);
+//
+//		consolColor_Change(GREEN);
+//
+//		//log
+//		printf("[%s : %d] bright => %d\n",
+//				(char *) base_name(__FILE__), __LINE__, max_bright);
+////				(char *) base_name(__FILE__), __LINE__, opt_val_Bright);
+//
+//		consolColor_Reset();
+//
+//
+//
+//	} else {
+//
+//		consolColor_Change(RED);
+//
+//		//log
+//		printf("[%s : %d] bright => not numeric (%s)\n",
+//				(char *) base_name(__FILE__), __LINE__, opt_val_Bright);
+//
+//		consolColor_Reset();
+//
+//		exit(-1);
+//
+//	}
+
+}//void _Setup_Options__Size(char **argv)

@@ -1117,6 +1117,7 @@ int option_Exists(char **argv, int argc, char *opt_string)
 }
 
 //char *
+//REF http://www.linuxquestions.org/questions/programming-9/c-equivalent-of-java's-isnumeric-287888/
 int is_Numeric(char *s)
 {
 	/*********************************

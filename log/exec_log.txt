@@ -450,3 +450,63 @@ argc=4: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src
 <argv>
 argc=5: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav
 
+[2014:05:29 14:34:37]
+<argv>
+argc=5: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav
+
+[2014:05:29 14:34:47]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio/b.wav
+
+[2014:05:29 14:52:20]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio/b.wav
+
+[2014:05:29 14:52:26]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/ab.wav -dst audio/b.wav
+
+[2014:05:29 14:54:25]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/ab.wav -dst audio/b.wav
+
+[2014:05:29 14:54:28]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio/b.wav
+
+[2014:05:29 14:54:48]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 14:57:50]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 14:57:53]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audios\b.wav
+
+[2014:05:29 14:57:57]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:00:46]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:02:32]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:03:09]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:06:06]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+
+[2014:05:29 15:08:17]
+<argv>
+argc=7: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio/a.wav -dst audio\b.wav
+

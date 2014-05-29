@@ -23,8 +23,8 @@
 // defines
 
 /////////////////////////////////////
-#define MAX_BRIGHTNESS	255
-#define MAX_SIXE		255
+//#define PPM_MAX_BRIGHTNESS	255
+#define PPM_MAX_SIZE		255
 
 /////////////////////////////////////
 
@@ -102,6 +102,29 @@ void Gen_PPM(int argc, char **argv)
 	 * Free: ppm
 	**********************************/
 	free(ppm);
+
+	//test
+	//log
+	printf("[%s : %d] colors\n", base_name(__FILE__), __LINE__);
+
+	int i = 0;
+
+	while(Colors[i]) {
+
+		//log
+		printf("[%s : %d] Colors[%d] = %s\n", base_name(__FILE__), __LINE__, i, Colors[i]);
+
+		i ++;
+
+	}
+
+	char *tmp = join(',', Colors, i);
+
+	//log
+	printf("[%s : %d] Colors => %s\n", base_name(__FILE__), __LINE__, tmp);
+
+
+
 
 }
 
@@ -210,15 +233,17 @@ void build_PPM_Pixels(void)
 
     ppm->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
 
-    int default_pixel_val = 150;
+//    int default_pixel_val = 150;
 
     for (i = 0; i < ppm->y; ++i) {
 
 		for (j = 0; j < ppm->x; ++j) {
 
-			ppm->pixels[position].r = default_pixel_val;
-			ppm->pixels[position].g = default_pixel_val;
-			ppm->pixels[position].b = default_pixel_val;
+			set_PixelVals(ppm, position, PIXEL_PURPLE);
+//			set_PixelVals(ppm, position, 100, 0, 0);
+//			ppm->pixels[position].r = default_pixel_val;
+//			ppm->pixels[position].g = default_pixel_val;
+//			ppm->pixels[position].b = default_pixel_val;
 //			ppm->pixels[position].b = ((int) pgm->grays[position] * (int) rgb[2]) / 100;
 
 			position ++;
@@ -249,7 +274,7 @@ void _Setup_Options__Bright(char **argv) {
 
 			//log
 			printf("[%s : %d] bright is %d => more than max value (%d)\n",
-					(char *) base_name(__FILE__), __LINE__, max_bright, MAX_BRIGHTNESS);
+					(char *) base_name(__FILE__), __LINE__, max_bright, PPM_MAX_BRIGHTNESS);
 	//				(char *) base_name(__FILE__), __LINE__, opt_val_Bright);
 
 			consolColor_Reset();
@@ -415,16 +440,16 @@ void _Setup_Options__Size(char **argv)
 			ppm_size[i] = atoi(tokens[i]);
 
 			/*********************************
-			 * Validate: > MAX_SIXE?
+			 * Validate: > PPM_MAX_SIZE?
 			**********************************/
-			if (ppm_size[i] > MAX_SIXE) {
+			if (ppm_size[i] > PPM_MAX_SIZE) {
 
 				consolColor_Change(RED);
 
 				//log
 				printf("[%s : %d] size is %d => more than max (%d)\n",
 							base_name(__FILE__), __LINE__,
-							ppm_size[i], MAX_SIXE);
+							ppm_size[i], PPM_MAX_SIZE);
 
 				consolColor_Reset();
 

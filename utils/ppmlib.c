@@ -2,6 +2,24 @@
 #include "../include/ppmlib.h"
 #endif
 
+/*********************************
+ * vars
+**********************************/
+//#define PIXEL_GREEN     0, 100, 0
+//#define PIXEL_BLUE      0, 0, 100
+//#define PIXEL_RED       100, 0, 0
+//#define PIXEL_PURPLE    100, 0, 100
+//#define PIXEL_WHITE     100, 100, 100
+//#define PIXEL_BLACK     0, 0, 0
+//#define PIXEL_GRAY      50, 50, 50
+
+char *Colors[] = {
+		"green",	"blue",	"light_blue", "red",
+		"purple", "yellow",
+		"white",	"black", "gray",
+		NULL
+};
+
 /*******************************
  int save_PPM(char *dst_file_path, PPM *ppm_dst)
  * @return 1 => PPM file written 
@@ -85,3 +103,12 @@ int save_PPM(char *dst_file_path, PPM *ppm_dst)
     return 1;
 
 }//enum RetVals save_PPM(FILE *fp, PPM *ppm_dst)
+
+void set_PixelVals(PPM *ppm, int position, int r, int g, int b)
+{
+
+	ppm->pixels[position].r = PPM_MAX_BRIGHTNESS * r / 100;
+	ppm->pixels[position].g = PPM_MAX_BRIGHTNESS * g / 100;
+	ppm->pixels[position].b = PPM_MAX_BRIGHTNESS * b / 100;
+
+}

@@ -1117,3 +1117,29 @@ int option_Exists(char **argv, int argc, char *opt_string)
 }
 
 //char *
+int is_Numeric(char *s)
+{
+	/*********************************
+	 * Initial check
+	**********************************/
+	if(*s == NULL) return false;
+
+	if(!isdigit(*s) && (*s != '-')) return false;
+
+	/*********************************
+	 * chars
+	**********************************/
+	int i = 1;
+//	s++;
+
+	while(*(s + i)) {
+
+		if(!isdigit(*(s + i))) return false;
+
+		i++;
+
+	}
+
+	return true;
+
+}//int is_Numeric(char *s)

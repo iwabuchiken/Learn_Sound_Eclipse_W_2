@@ -7,6 +7,9 @@
 pushd C:\WORKS\WS\Eclipse_Kepler\Learn_Sound_Eclipse_W
 .\Debug\Learn_Sound_Eclipse_W.exe
 
+# Gen_PPM
+.\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 255,255 
+
 # Ubuntu
 
 ------------------------

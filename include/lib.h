@@ -247,6 +247,8 @@ void init_ConsoleColors(void);
 
 int option_Exists(char **, int, char *);
 
+int is_Numeric(char *s);
+
 #ifdef	__cplusplus
 }
 #endif

@@ -3,6 +3,11 @@
 #include "../include/methods.h"
 #endif
 
+#ifndef PPMLIB_H
+#include "../include/ppmlib.h"
+#endif
+
+
 //#ifndef PNGLIB_H
 ////#include "include/pnglib.h"
 //#include "include/pnglib.h"
@@ -54,6 +59,17 @@ void show_help(void)
     
     //log
     printf("[%s : %d]\n%s\n", base_name(__FILE__), __LINE__, msg);
+
+    /*********************************
+	 * Color names
+	**********************************/
+	int tmp_i = 0;
+
+	while(*(Colors + tmp_i)) tmp_i ++;
+
+	char *tmp_ch = join(',', Colors, tmp_i);
+
+	printf("Available color names => %s\n", tmp_ch);
 
     consolColor_Reset();
     

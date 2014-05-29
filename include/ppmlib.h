@@ -42,6 +42,14 @@ extern "C" {
 #define PIXEL_BLACK     0, 0, 0
 #define PIXEL_GRAY      50, 50, 50
 
+//#define INIT_PIXEL(rgb, vals) rgb = vals;
+//#define INIT_PIXEL(rgb, vals) rgb = &vals;	// incompatible types when assigning to type 'int[3]' from type 'int (*)[3]'
+//#define INIT_PIXEL(rgb, vals) ((int *)rgb) = vals;
+#define INIT_PIXEL(rgb, vals) rgb[0] = vals[0]; rgb[1] = vals[1]; rgb[2] = vals[2];
+//#define INIT_PIXEL(rgb, r, g, b) rgb[0] = r; rgb[1] = g; rgb[2] = b;
+
+//#define INIT_PIXEL_2(rgb, param) INIT_PIXEL(rgb, )
+
 #define PPM_MAX_BRIGHTNESS	255
 
 /*********************************
@@ -84,7 +92,8 @@ char *Colors[];
 //    char * conv_DstFile_Name(void);
 
     void set_PixelVals
-    (PPM *ppm, int position, int r, int g, int b);
+    (PPM *ppm, int position, int rgb[3]);
+//    (PPM *ppm, int position, int r, int g, int b);
 //    {
 //        ptr[0] = 255 * r / 100;
 //        ptr[1] = 255 * g / 100;

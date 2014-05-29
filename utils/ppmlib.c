@@ -104,11 +104,12 @@ int save_PPM(char *dst_file_path, PPM *ppm_dst)
 
 }//enum RetVals save_PPM(FILE *fp, PPM *ppm_dst)
 
-void set_PixelVals(PPM *ppm, int position, int r, int g, int b)
+void set_PixelVals(PPM *ppm, int position, int rgb[3])
+//void set_PixelVals(PPM *ppm, int position, int r, int g, int b)
 {
 
-	ppm->pixels[position].r = PPM_MAX_BRIGHTNESS * r / 100;
-	ppm->pixels[position].g = PPM_MAX_BRIGHTNESS * g / 100;
-	ppm->pixels[position].b = PPM_MAX_BRIGHTNESS * b / 100;
+	ppm->pixels[position].r = PPM_MAX_BRIGHTNESS * rgb[0] / 100;
+	ppm->pixels[position].g = PPM_MAX_BRIGHTNESS * rgb[1] / 100;
+	ppm->pixels[position].b = PPM_MAX_BRIGHTNESS * rgb[2] / 100;
 
 }

@@ -34,6 +34,7 @@
 void _Setup_Options(int argc, char **argv);
 void _Setup_Options__Bright(char **argv);
 void _Setup_Options__Size(char **argv);
+void _Setup_Options__Bg(char **argv);
 
 void build_PPM_Header(void);
 void build_PPM_Pixels(void);
@@ -57,6 +58,9 @@ void Gen_PPM(int argc, char **argv)
 	//log
 	printf("[%s : %d] Gen_PPM()\n", base_name(__FILE__), __LINE__);
 
+	/*********************************
+	 * Options
+	**********************************/
 	_Setup_Options(argc, argv);
 
 	/*********************************
@@ -135,74 +139,20 @@ void _Setup_Options(int argc, char **argv)
 	**********************************/
 	_Setup_Options__Size(argv);
 
-//	char *opt_key_Size = "-size";
-//
-//	char *opt_val_Size = (char *) get_Opt_Value(argv, opt_key_Size);
-
 	/*********************************
 	 * Opt: bright
 	**********************************/
 	_Setup_Options__Bright(argv);
 
-//	char *opt_key_Bright = "-bright";
-//
-//	char *opt_val_Bright = (char *) get_Opt_Value(argv, opt_key_Bright);
-//
-//	consolColor_Change(GREEN);
-//
-//	if (is_Numeric(opt_val_Bright)) {
-//
-//		max_bright = atoi(opt_val_Bright);
-//
-//		consolColor_Change(GREEN);
-//
-//		//log
-//		printf("[%s : %d] bright => %d\n",
-//				(char *) base_name(__FILE__), __LINE__, max_bright);
-////				(char *) base_name(__FILE__), __LINE__, opt_val_Bright);
-//
-//		consolColor_Reset();
-//
-//
-//
-//	} else {
-//
-//		consolColor_Change(RED);
-//
-//		//log
-//		printf("[%s : %d] bright => not numeric (%s)\n",
-//				(char *) base_name(__FILE__), __LINE__, opt_val_Bright);
-//
-//		consolColor_Reset();
-//
-//		exit(-1);
-//
-//	}
-//
-//
-////	//log
-////	printf("[%s : %d] bright => %s\n",
-////			(char *) base_name(__FILE__), __LINE__, opt_val_Bright);
-////
-////	consolColor_Reset();
+	/*********************************
+	 * Opt: background
+	**********************************/
+	_Setup_Options__Bg(argv);
 
 	/*********************************
 	 * Opt: dst
 	**********************************/
 	_Setup_Options__Dst(argv);
-
-//	char *opt_key_Dst = "-dst";
-//
-//	ppm_file_dst = (char *) get_Opt_Value(argv, opt_key_Dst);
-//
-//
-//
-//	consolColor_Change(GREEN);
-//	//log
-//	printf("[%s : %d] ppm_file_dst => %s\n",
-//			(char *) base_name(__FILE__), __LINE__, ppm_file_dst);
-//
-//	consolColor_Reset();
 
 
 }
@@ -235,11 +185,154 @@ void build_PPM_Pixels(void)
 
 //    int default_pixel_val = 150;
 
+    int rgb[3];
+//    int tmp_int_array[3] = {PIXEL_YELLOW};
+//    int tmp_int_array = {PIXEL_YELLOW};
+
+	if (!strcmp(bg_color, Colors[0])) {
+		int tmp_int_array[3] = {PIXEL_GREEN};
+		INIT_PIXEL(rgb, tmp_int_array);
+//		set_PixelVals(ppm, position, PIXEL_GREEN);
+
+	} else if (!strcmp(bg_color, Colors[1])) {
+
+		int tmp_int_array[3] = {PIXEL_BLUE};
+		INIT_PIXEL(rgb, tmp_int_array);
+
+	} else if (!strcmp(bg_color, Colors[2])) {
+
+		int tmp_int_array[3] = {PIXEL_LIGHT_BLUE};
+		INIT_PIXEL(rgb, tmp_int_array);
+
+	} else if (!strcmp(bg_color, Colors[3])) {
+
+		int tmp_int_array[3] = {PIXEL_RED};
+		INIT_PIXEL(rgb, tmp_int_array);
+
+	} else if (!strcmp(bg_color, Colors[4])) {
+
+		int tmp_int_array[3] = {PIXEL_PURPLE};
+		INIT_PIXEL(rgb, tmp_int_array);
+
+	} else if (!strcmp(bg_color, Colors[5])) {
+
+		int tmp_int_array[3] = {PIXEL_YELLOW};
+		INIT_PIXEL(rgb, tmp_int_array);
+
+	} else if (!strcmp(bg_color, Colors[6])) {
+
+		int tmp_int_array[3] = {PIXEL_WHITE};
+		INIT_PIXEL(rgb, tmp_int_array);
+
+	} else if (!strcmp(bg_color, Colors[7])) {
+
+		int tmp_int_array[3] = {PIXEL_BLACK};
+		INIT_PIXEL(rgb, tmp_int_array);
+
+	} else if (!strcmp(bg_color, Colors[8])) {
+
+		int tmp_int_array[3] = {PIXEL_GRAY};
+		INIT_PIXEL(rgb, tmp_int_array);
+
+	} else {
+
+		int tmp_int_array[3] = {PIXEL_LIGHT_BLUE};
+		INIT_PIXEL(rgb, tmp_int_array);
+
+	}
+
+//	else if (!strcmp(bg_color, Colors[1]))
+//		set_PixelVals(ppm, position, PIXEL_BLUE);
+//
+//	else if (!strcmp(bg_color, Colors[2]))
+//		set_PixelVals(ppm, position, PIXEL_LIGHT_BLUE);
+//
+//	else if (!strcmp(bg_color, Colors[3]))
+//		set_PixelVals(ppm, position, PIXEL_RED);
+//
+//	else if (!strcmp(bg_color, Colors[4]))
+//		set_PixelVals(ppm, position, PIXEL_PURPLE);
+//
+//	else if (!strcmp(bg_color, Colors[5]))
+//		set_PixelVals(ppm, position, PIXEL_YELLOW);
+//
+//	else if (!strcmp(bg_color, Colors[6]))
+//		set_PixelVals(ppm, position, PIXEL_WHITE);
+//
+//	else if (!strcmp(bg_color, Colors[7]))
+//		set_PixelVals(ppm, position, PIXEL_BLACK);
+//
+//	else if (!strcmp(bg_color, Colors[8]))
+//		set_PixelVals(ppm, position, PIXEL_GRAY);
+//    INIT_PIXEL(rgb, tmp_int_array);
+
+
+//    int rgb[3] = {PIXEL_GREEN};
+//    int rgb[3] = {PIXEL_PURPLE};
+
+//    if (!strcmp(bg_color, Colors[0]))
+//    //				set_PixelVals(ppm, position, PIXEL_GREEN);
+//    INIT_PIXEL(rgb, 100,100,100);
+//    INIT_PIXEL(rgb, PIXEL_PURPLE);
+
     for (i = 0; i < ppm->y; ++i) {
 
 		for (j = 0; j < ppm->x; ++j) {
 
-			set_PixelVals(ppm, position, PIXEL_PURPLE);
+//			char *Colors[] = {
+//					0			1		2				3
+//					"green",	"blue",	"light_blue", "red",
+//					4			5
+//					"purple", "yellow",
+//					6			7			8
+//					"white",	"black", "gray",
+//					NULL
+//			};
+//#define PIXEL_GREEN     0, 100, 0
+//
+//#define PIXEL_BLUE      0, 0, 100
+//#define PIXEL_LIGHT_BLUE      0, 100, 100
+//
+//#define PIXEL_RED       100, 0, 0
+//
+//#define PIXEL_PURPLE    100, 0, 100
+//#define PIXEL_YELLOW    100, 100, 0
+//
+//#define PIXEL_WHITE     100, 100, 100
+//#define PIXEL_BLACK     0, 0, 0
+//#define PIXEL_GRAY      50, 50, 50
+
+//			if (!strcmp(bg_color, Colors[0]))
+//				set_PixelVals(ppm, position, PIXEL_GREEN);
+//
+//			else if (!strcmp(bg_color, Colors[1]))
+//				set_PixelVals(ppm, position, PIXEL_BLUE);
+//
+//			else if (!strcmp(bg_color, Colors[2]))
+//				set_PixelVals(ppm, position, PIXEL_LIGHT_BLUE);
+//
+//			else if (!strcmp(bg_color, Colors[3]))
+//				set_PixelVals(ppm, position, PIXEL_RED);
+//
+//			else if (!strcmp(bg_color, Colors[4]))
+//				set_PixelVals(ppm, position, PIXEL_PURPLE);
+//
+//			else if (!strcmp(bg_color, Colors[5]))
+//				set_PixelVals(ppm, position, PIXEL_YELLOW);
+//
+//			else if (!strcmp(bg_color, Colors[6]))
+//				set_PixelVals(ppm, position, PIXEL_WHITE);
+//
+//			else if (!strcmp(bg_color, Colors[7]))
+//				set_PixelVals(ppm, position, PIXEL_BLACK);
+//
+//			else if (!strcmp(bg_color, Colors[8]))
+//				set_PixelVals(ppm, position, PIXEL_GRAY);
+
+
+				set_PixelVals(ppm, position, rgb);
+//				set_PixelVals(ppm, position, PIXEL_PURPLE);
+
 //			set_PixelVals(ppm, position, 100, 0, 0);
 //			ppm->pixels[position].r = default_pixel_val;
 //			ppm->pixels[position].g = default_pixel_val;
@@ -358,9 +451,16 @@ void _Setup_Options__Dst(char **argv) {
 //			base_name(__FILE__), __LINE__, str_size, strlen(str_size));
 
 	/*********************************
+	 * String: backgfound
+	**********************************/
+	char *label_bg = "_bg=";
+
+	char *str_bg = (char *) malloc(sizeof(char) * 3);
+
+	/*********************************
 	 * Join
 	**********************************/
-	int size_of_composite = 7;
+	int size_of_composite = 9;
 	char **tmp = (char **) malloc(sizeof(char *) * size_of_composite);
 
 	tmp[0] = tokens[0];
@@ -368,8 +468,10 @@ void _Setup_Options__Dst(char **argv) {
 	tmp[2] = str_size;
 	tmp[3] = label_bright;
 	tmp[4] = str_bright;
-	tmp[5] = ".";
-	tmp[6] = tokens[1];
+	tmp[5] = label_bg;
+	tmp[6] = bg_color;
+	tmp[7] = ".";
+	tmp[8] = tokens[1];
 
 	char *dst_final = (char *) join_simple(tmp, size_of_composite);
 
@@ -466,41 +568,59 @@ void _Setup_Options__Size(char **argv)
 
 	}//for(i = 0; i < 2; i++)
 
-
-
-//	//log
-//	printf("[%s : %d] tokens[0] => %s\n", base_name(__FILE__), __LINE__, tokens[0]);
-
-
-//	consolColor_Change(GREEN);
-//
-//	if (is_Numeric(opt_val_Bright)) {
-//
-//		max_bright = atoi(opt_val_Bright);
-//
-//		consolColor_Change(GREEN);
-//
-//		//log
-//		printf("[%s : %d] bright => %d\n",
-//				(char *) base_name(__FILE__), __LINE__, max_bright);
-////				(char *) base_name(__FILE__), __LINE__, opt_val_Bright);
-//
-//		consolColor_Reset();
-//
-//
-//
-//	} else {
-//
-//		consolColor_Change(RED);
-//
-//		//log
-//		printf("[%s : %d] bright => not numeric (%s)\n",
-//				(char *) base_name(__FILE__), __LINE__, opt_val_Bright);
-//
-//		consolColor_Reset();
-//
-//		exit(-1);
-//
-//	}
-
 }//void _Setup_Options__Size(char **argv)
+
+void _Setup_Options__Bg(char **argv)
+{
+
+	char *opt_key_Bg = "-bg";
+
+	char *opt_val_Bg = (char *) get_Opt_Value(argv, opt_key_Bg);
+
+	/*********************************
+	 * Validate
+	**********************************/
+	int tmp_i = 0;
+
+	while(*(Colors + tmp_i)) tmp_i ++;
+
+
+	int res_i = is_InArray(opt_val_Bg, Colors, tmp_i);
+
+	if (res_i != true) {
+
+		consolColor_Change(RED);
+
+		//log
+		printf("[%s : %d] Unknown color name: %s\n",
+					base_name(__FILE__), __LINE__, opt_val_Bg);
+
+		consolColor_Reset();
+
+		char *tmp_ch = join(',', Colors, tmp_i);
+
+		//log
+		printf("[%s : %d] Available color names => %s\n",
+				base_name(__FILE__), __LINE__, tmp_ch);
+
+		exit(-1);
+
+	} else {//if (res_i != true)
+
+		bg_color = opt_val_Bg;
+
+		consolColor_Change(GREEN);
+
+		//log
+		printf("[%s : %d] Background => %s\n",
+					base_name(__FILE__), __LINE__, bg_color);
+//					base_name(__FILE__), __LINE__, opt_val_Bg);
+
+		consolColor_Reset();
+
+
+	}//if (res_i != true)
+
+
+
+}//void _Setup_Options__Bg(char **argv)

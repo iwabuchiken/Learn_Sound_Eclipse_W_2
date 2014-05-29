@@ -254,3 +254,43 @@ argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -siz
 <argv>
 argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 180,25a -bright 200
 
+[2014:05:29 10:29:44]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 180,255 -bright 200
+
+[2014:05:29 10:30:13]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 180,255 -bright 200
+
+[2014:05:29 10:31:34]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 180,255 -bright 200
+
+[2014:05:29 10:38:06]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 180,255 -bright 200
+
+[2014:05:29 10:45:14]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 180,255 -bright 200
+
+[2014:05:29 10:45:22]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 80,255 -bright 200
+
+[2014:05:29 10:50:05]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 80,255 -bright 200
+
+[2014:05:29 10:52:31]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 80,255 -bright 200
+
+[2014:05:29 10:53:29]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 80,255 -bright 200
+
+[2014:05:29 10:53:45]
+<argv>
+argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 200,50 -bright 200
+

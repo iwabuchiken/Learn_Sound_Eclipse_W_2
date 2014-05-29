@@ -24,6 +24,7 @@
 
 /////////////////////////////////////
 #define MAX_BRIGHTNESS	255
+#define MAX_SIXE		255
 
 /////////////////////////////////////
 
@@ -165,18 +166,20 @@ void _Setup_Options(int argc, char **argv)
 	/*********************************
 	 * Opt: dst
 	**********************************/
-	char *opt_key_Dst = "-dst";
+	_Setup_Options__Dst(argv);
 
-	ppm_file_dst = (char *) get_Opt_Value(argv, opt_key_Dst);
-
-
-
-	consolColor_Change(GREEN);
-	//log
-	printf("[%s : %d] ppm_file_dst => %s\n",
-			(char *) base_name(__FILE__), __LINE__, ppm_file_dst);
-
-	consolColor_Reset();
+//	char *opt_key_Dst = "-dst";
+//
+//	ppm_file_dst = (char *) get_Opt_Value(argv, opt_key_Dst);
+//
+//
+//
+//	consolColor_Change(GREEN);
+//	//log
+//	printf("[%s : %d] ppm_file_dst => %s\n",
+//			(char *) base_name(__FILE__), __LINE__, ppm_file_dst);
+//
+//	consolColor_Reset();
 
 
 }
@@ -237,6 +240,24 @@ void _Setup_Options__Bright(char **argv) {
 
 		max_bright = atoi(opt_val_Bright);
 
+		/*********************************
+		 * Validate: <= 255
+		**********************************/
+		if (max_bright > 255) {
+
+			consolColor_Change(RED);
+
+			//log
+			printf("[%s : %d] bright is %d => more than max value (%d)\n",
+					(char *) base_name(__FILE__), __LINE__, max_bright, MAX_BRIGHTNESS);
+	//				(char *) base_name(__FILE__), __LINE__, opt_val_Bright);
+
+			consolColor_Reset();
+
+			exit(-1);
+
+		}
+
 		consolColor_Change(GREEN);
 
 		//log
@@ -271,6 +292,93 @@ void _Setup_Options__Bright(char **argv) {
 
 }
 
+void _Setup_Options__Dst(char **argv) {
+
+	char *opt_key_Dst = "-dst";
+
+	ppm_file_dst = (char *) get_Opt_Value(argv, opt_key_Dst);
+
+
+	char delim = '.';
+
+	int position = 1; int num_of_tokens;
+
+	char **tokens = (char **) str_split_r_2
+			(ppm_file_dst, delim, position, &num_of_tokens);
+
+	/*********************************
+	 * String: size
+	**********************************/
+	char *label_size = "_size=";
+
+	char *str_size = (char *) malloc(sizeof(char) * 7);
+
+	sprintf(str_size, "%d,%d", ppm_size[0], ppm_size[1]);
+
+	//log
+	printf("[%s : %d] str_size => %s(%d)\n",
+			base_name(__FILE__), __LINE__, str_size, strlen(str_size));
+
+	/*********************************
+	 * String: bright
+	**********************************/
+	char *label_bright = "_bright=";
+
+	char *str_bright = (char *) malloc(sizeof(char) * 3);
+
+	sprintf(str_bright, "%d", max_bright);
+
+//	//log
+//	printf("[%s : %d] str_size => %s(%d)\n",
+//			base_name(__FILE__), __LINE__, str_size, strlen(str_size));
+
+	/*********************************
+	 * Join
+	**********************************/
+	int size_of_composite = 7;
+	char **tmp = (char **) malloc(sizeof(char *) * size_of_composite);
+
+	tmp[0] = tokens[0];
+	tmp[1] = label_size;
+	tmp[2] = str_size;
+	tmp[3] = label_bright;
+	tmp[4] = str_bright;
+	tmp[5] = ".";
+	tmp[6] = tokens[1];
+
+	char *dst_final = (char *) join_simple(tmp, size_of_composite);
+
+	/*********************************
+	 * Dst => re-initialize
+	**********************************/
+	ppm_file_dst = dst_final;
+
+//	//log
+//	printf("[%s : %d] *dst_final = %s\n", base_name(__FILE__), __LINE__, dst_final);
+
+//	//log
+//	printf("[%s : %d] num_of_tokens = %d\n", base_name(__FILE__), __LINE__, num_of_tokens);
+
+
+//	int i;
+
+//	for (i = 0; i < num_of_tokens; ++i) {
+//
+//		//log
+//		printf("[%s : %d] num_of_tokens[%d] = %s\n",
+//				base_name(__FILE__), __LINE__, i, tokens[i]);
+//
+//	}
+
+	consolColor_Change(GREEN);
+	//log
+	printf("[%s : %d] ppm_file_dst => %s\n",
+			(char *) base_name(__FILE__), __LINE__, ppm_file_dst);
+
+	consolColor_Reset();
+
+}//void _Setup_Options__Dst(char **argv)
+
 void _Setup_Options__Size(char **argv)
 {
 
@@ -280,7 +388,7 @@ void _Setup_Options__Size(char **argv)
 
 	char delim = ',';
 
-	int position = 1; int *num_of_tokens;
+	int position = 1; int num_of_tokens;
 
 	char **tokens = (char **) str_split_r_2
 			(opt_val_Size, delim, position, &num_of_tokens);
@@ -305,6 +413,24 @@ void _Setup_Options__Size(char **argv)
 		} else {
 
 			ppm_size[i] = atoi(tokens[i]);
+
+			/*********************************
+			 * Validate: > MAX_SIXE?
+			**********************************/
+			if (ppm_size[i] > MAX_SIXE) {
+
+				consolColor_Change(RED);
+
+				//log
+				printf("[%s : %d] size is %d => more than max (%d)\n",
+							base_name(__FILE__), __LINE__,
+							ppm_size[i], MAX_SIXE);
+
+				consolColor_Reset();
+
+				exit(-1);
+
+			}
 
 			//log
 			printf("[%s : %d] size  => %d : %s\n",

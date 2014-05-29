@@ -623,6 +623,10 @@ char ** str_split_r_2
         //log
     printf("[%s : %d] result => prepared\n", base_name(__FILE__), __LINE__);
 
+    /*********************************
+	 * num_of_tokens
+	**********************************/
+    *num_of_tokens = 2;
 
 //		return string;
 	return result;

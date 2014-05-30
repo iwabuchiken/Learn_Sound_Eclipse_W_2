@@ -577,8 +577,8 @@ char ** str_split_r_2
 
 	char *bottom = strrchr(string, delim);
 
-	//log
-	printf("[%s:%d] bottom => %s\n", base_name(__FILE__), __LINE__, bottom);
+//	//log
+//	printf("[%s:%d] bottom => %s\n", base_name(__FILE__), __LINE__, bottom);
 
 	/************************************
 	 * If strrchr returns a NULL pointer
@@ -600,8 +600,8 @@ char ** str_split_r_2
 	************************************/
 	int dif = bottom - string;
 
-	//log
-	printf("[%s:%d] dif => %d\n", base_name(__FILE__), __LINE__, dif);
+//	//log
+//	printf("[%s:%d] dif => %d\n", base_name(__FILE__), __LINE__, dif);
 
 	/************************************
 	 * first token
@@ -611,8 +611,8 @@ char ** str_split_r_2
 	strncpy(token_1, string, dif);
 	*(token_1 + dif) = '\0';
 
-	//log
-	printf("[%s:%d] token_1 => %s\n", base_name(__FILE__), __LINE__, token_1);
+//	//log
+//	printf("[%s:%d] token_1 => %s\n", base_name(__FILE__), __LINE__, token_1);
 
 	/************************************
 	 * Build: tokens
@@ -620,8 +620,8 @@ char ** str_split_r_2
 	*(result) = strdup(token_1);
 	*(result + 1) = strdup(bottom + 1);
 
-        //log
-    printf("[%s : %d] result => prepared\n", base_name(__FILE__), __LINE__);
+//        //log
+//    printf("[%s : %d] result => prepared\n", base_name(__FILE__), __LINE__);
 
     /*********************************
 	 * num_of_tokens

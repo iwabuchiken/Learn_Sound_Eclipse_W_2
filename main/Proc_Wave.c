@@ -46,6 +46,16 @@
 
 /////////////////////////////////////
 
+// defines
+
+/////////////////////////////////////
+#define DEFALUT_PPM_WIDTH 500
+#define DEFALUT_PPM_HEIGHT 500
+//#define DEFALUT_PPM_WIDTH 255
+//#define DEFALUT_PPM_HEIGHT 255
+
+/////////////////////////////////////
+
 // global vars
 
 /////////////////////////////////////
@@ -54,25 +64,36 @@ MONO_PCM pcm0, pcm1;
 char *file_src_wave;
 char *file_dst_wave;
 
-char *operation;
+char *operation;	// 1. name of the operation to be conducted
+					// 2. The name will be one of those in "op_names" array
 
-int save_file = true;
+int save_file = true;	// if true, a new wave file will be saved
+						//	with the name given in '-dst' optoin
 
 char *op_names[] = {
 
 		"wave-to-ppm",
-		NULL
+		NULL			// NULL is added so that counting the elements
+						//	will require only the array itself, not the
+						//	size of it as well.
 };
 
 char *ppm_file_dst;
 
-int ppm_size[2] = {255, 255};
+// The size of the ppm file that will display the wave form of the audio data
+int ppm_size[2] = {DEFALUT_PPM_WIDTH, DEFALUT_PPM_HEIGHT};
+
+// Max brightness value for the ppm file
 int max_bright = 255;
 
+// 1. Background color for the ppm file
+// 2. The value will be one of those in Colors:ppmlib.c
 char *bg_color;
 
 PPM *ppm;
 
+// Pixel values converted from wave data: 0-255
+int pixel_data[DEFALUT_PPM_WIDTH];
 
 /////////////////////////////////////
 
@@ -85,7 +106,7 @@ void _Setup_Options_ProcWave__Dst(char **argv);
 void _Setup_Options_ProcWave__SaveFile(char **argv, int argc);
 void _Setup_Options_ProcWave__Op(char **argv, int argc);
 
-
+void Proc_Wave(int argc, char **argv);
 void Proc_Wave__SaveWave(void);
 void Proc_Wave__ReadWave(void);
 
@@ -96,6 +117,11 @@ void Proc_Wave__Op_Dispatch(void);
 void _op_Wave2PPM(void);
 void build_PPM_Header_Wave(void);
 void build_PPM_Pixels_Wave(void);
+void build_PPM_Pixels_WaveData(void);
+
+void build_PPM_Pixels_Image(void);
+
+
 
 /////////////////////////////////////
 
@@ -115,7 +141,7 @@ void Proc_Wave(int argc, char **argv)
 	/*********************************
 	 * Read: wave
 	**********************************/
-	Proc_Wave__ReadWave();
+	Proc_Wave__ReadWave();	// pcm0
 
 	/*********************************
 	 * Analyze
@@ -518,12 +544,26 @@ void _op_Wave2PPM(void)
 	printf("[%s : %d] PPM header => created\n", base_name(__FILE__), __LINE__);
 
 	/*********************************
-	 * Build: PPM pixels
+	 * Build: PPM pixels: Background
 	**********************************/
 	build_PPM_Pixels_Wave();
 
 	//log
 	printf("[%s : %d] PPM pixels => created\n", base_name(__FILE__), __LINE__);
+
+	/*********************************
+	 * Build: PPM pixels from: Wave data
+	**********************************/
+	build_PPM_Pixels_WaveData();
+
+	/*********************************
+	 * Build: PPM image
+	**********************************/
+	build_PPM_Pixels_Image();
+
+	//log
+	printf("[%s : %d] ppm pixel image => created\n", base_name(__FILE__), __LINE__);
+
 
 	/*********************************
 	 * dst file path
@@ -636,3 +676,87 @@ void build_PPM_Pixels_Wave()
 
 
 }
+
+void build_PPM_Pixels_WaveData(void)
+{
+
+	int num_of_data = DEFALUT_PPM_WIDTH;
+//	int num_of_data = 255;
+
+	int i;
+
+	double val_d;
+
+//	pixel_data[num_of_data];
+//	int pixel_data[num_of_data];
+
+	int offset = 10000;
+
+	for (i = 0; i < num_of_data; ++i) {
+
+		pixel_data[i] = (pcm0.s[i + offset] * 100 * 255) / 100;
+//		pixel_data[i] = (pcm0.s[i] * 100 * 255) / 100;
+
+	}
+
+	//log
+	printf("[%s : %d] Conversion => done\n", base_name(__FILE__), __LINE__);
+
+//	for (i = 0; i < 10; ++i) {
+//
+//		//log
+//		printf("[%s : %d] pixel_data[%d] => %d\n",
+//				base_name(__FILE__), __LINE__, i, pixel_data[i]);
+//
+//	}
+
+
+//    int position = 0;
+//
+//    int i, j;
+//
+//    int num_of_pixels = ppm->x * ppm->y;
+//
+//    ppm->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
+//
+//    int rgb[3] = {PIXEL_BLUE};
+//
+//    for (i = 0; i < ppm->y; ++i) {
+//
+//		for (j = 0; j < ppm->x; ++j) {
+//
+//			set_PixelVals(ppm, position, rgb);	// set_PixelVals() : ppmlib.c
+//
+//			position ++;
+//
+//		}
+//    }
+
+}//void build_PPM_Pixels_WaveData(void)
+
+void build_PPM_Pixels_Image(void)
+{
+	int rgb[3] = {PIXEL_WHITE};
+
+	int position = 0;
+
+	int i, j;
+
+	for (i = 0; i < ppm->y; ++i) {
+
+		for (j = 0; j < pixel_data[i]; ++j) {
+
+			set_PixelVals(ppm, position, rgb);
+
+			position ++;
+
+		}
+
+		for(; j < ppm->x; j++) {
+
+			position ++;
+
+		}
+	}
+
+}//void build_PPM_Pixels_Image(void)

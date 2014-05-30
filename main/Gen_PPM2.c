@@ -229,35 +229,29 @@ void build_PPM_Pixels2(void)
     //log
 	printf("[%s : %d] malloc done for => ppm_A2->pixels[i]\n", base_name(__FILE__), __LINE__);
 
-	/*********************************
-	 * Init: each pixel
-	**********************************/
-	for (i = 0; i < ppm_A2->y; ++i) {
-	//    for (i = 0; i < ppm_A2->x; ++i) {
-
-		pixel *pixel_row = ppm_A2->pixels[i];
-
-		for (j = 0; j < ppm_A2->x; ++j) {
-
-			pixel pix;
-
-			pix.r = 0;
-			pix.g = 0;
-			pix.b = 0;
-
-			pixel_row[j] = pix;
-
-		}
-
-//		ppm_A2->pixels[i] = (pixel *) malloc(sizeof(pixel) * ppm_A2->x);
-
-	}
-
-//    num_of_pixels = ppm_A->x * ppm_A->y;
+//	/*********************************
+//	 * Init: each pixel
+//	**********************************/
+//	for (i = 0; i < ppm_A2->y; ++i) {
+//	//    for (i = 0; i < ppm_A2->x; ++i) {
 //
-//    ppm_A->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
-
-//    int default_pixel_val = 150;
+//		pixel *pixel_row = ppm_A2->pixels[i];
+//
+//		for (j = 0; j < ppm_A2->x; ++j) {
+//
+//			pixel pix;
+//
+//			pix.r = 0;
+//			pix.g = 0;
+//			pix.b = 0;
+//
+//			pixel_row[j] = pix;
+//
+//		}
+//
+////		ppm_A2->pixels[i] = (pixel *) malloc(sizeof(pixel) * ppm_A2->x);
+//
+//	}
 
     /*********************************
 	 * Set: pixels
@@ -338,7 +332,7 @@ void build_PPM_Pixels2(void)
 //		printf("[%s : %d] for loop => i = %d\n", base_name(__FILE__), __LINE__, i);
 
 
-    	pixel* pixels_row = ppm_A2->pixels[i];
+//    	pixel* pixels_row = ppm_A2->pixels[i];
 //    	pixel* pixels_row = ppm_A2.pixels[i];
 
 //    	//log
@@ -347,14 +341,18 @@ void build_PPM_Pixels2(void)
 
 		for (j = 0; j < ppm_A2->x; ++j) {
 
+			ppm_A2->pixels[i][j].r = 100;
+			ppm_A2->pixels[i][j].g = 0;
+			ppm_A2->pixels[i][j].b = 0;
+
 //			pixel *pix = (pixel *) malloc(sizeof(pixel) * 1);
 //			pixel pix = (pixel) malloc(sizeof(pixel) * 1); // conversion to non-scalar type requested
-			pixel pix = pixels_row[j];
+//			pixel pix = pixels_row[j];
 //			pixel pix;
 
-			pix.r = rgb[0];
-			pix.g = rgb[1];
-			pix.b = rgb[2];
+//			pix.r = rgb[0];
+//			pix.g = rgb[1];
+//			pix.b = rgb[2];
 //
 //			pixels_row[j] = pix;
 

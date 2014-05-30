@@ -7,6 +7,10 @@
 pushd C:\WORKS\WS\Eclipse_Kepler\Learn_Sound_Eclipse_W
 .\Debug\Learn_Sound_Eclipse_W.exe
 
+
+# Win:Wave => wave-to-ppm 
+.\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+
 # Gen_PPM
 .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test.ppm -size 255,255 
 

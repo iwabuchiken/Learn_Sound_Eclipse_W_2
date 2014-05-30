@@ -242,103 +242,11 @@ void build_PPM_Pixels(void)
 
 	}
 
-//	else if (!strcmp(bg_color, Colors[1]))
-//		set_PixelVals(ppm, position, PIXEL_BLUE);
-//
-//	else if (!strcmp(bg_color, Colors[2]))
-//		set_PixelVals(ppm, position, PIXEL_LIGHT_BLUE);
-//
-//	else if (!strcmp(bg_color, Colors[3]))
-//		set_PixelVals(ppm, position, PIXEL_RED);
-//
-//	else if (!strcmp(bg_color, Colors[4]))
-//		set_PixelVals(ppm, position, PIXEL_PURPLE);
-//
-//	else if (!strcmp(bg_color, Colors[5]))
-//		set_PixelVals(ppm, position, PIXEL_YELLOW);
-//
-//	else if (!strcmp(bg_color, Colors[6]))
-//		set_PixelVals(ppm, position, PIXEL_WHITE);
-//
-//	else if (!strcmp(bg_color, Colors[7]))
-//		set_PixelVals(ppm, position, PIXEL_BLACK);
-//
-//	else if (!strcmp(bg_color, Colors[8]))
-//		set_PixelVals(ppm, position, PIXEL_GRAY);
-//    INIT_PIXEL(rgb, tmp_int_array);
-
-
-//    int rgb[3] = {PIXEL_GREEN};
-//    int rgb[3] = {PIXEL_PURPLE};
-
-//    if (!strcmp(bg_color, Colors[0]))
-//    //				set_PixelVals(ppm, position, PIXEL_GREEN);
-//    INIT_PIXEL(rgb, 100,100,100);
-//    INIT_PIXEL(rgb, PIXEL_PURPLE);
-
     for (i = 0; i < ppm->y; ++i) {
 
 		for (j = 0; j < ppm->x; ++j) {
 
-//			char *Colors[] = {
-//					0			1		2				3
-//					"green",	"blue",	"light_blue", "red",
-//					4			5
-//					"purple", "yellow",
-//					6			7			8
-//					"white",	"black", "gray",
-//					NULL
-//			};
-//#define PIXEL_GREEN     0, 100, 0
-//
-//#define PIXEL_BLUE      0, 0, 100
-//#define PIXEL_LIGHT_BLUE      0, 100, 100
-//
-//#define PIXEL_RED       100, 0, 0
-//
-//#define PIXEL_PURPLE    100, 0, 100
-//#define PIXEL_YELLOW    100, 100, 0
-//
-//#define PIXEL_WHITE     100, 100, 100
-//#define PIXEL_BLACK     0, 0, 0
-//#define PIXEL_GRAY      50, 50, 50
-
-//			if (!strcmp(bg_color, Colors[0]))
-//				set_PixelVals(ppm, position, PIXEL_GREEN);
-//
-//			else if (!strcmp(bg_color, Colors[1]))
-//				set_PixelVals(ppm, position, PIXEL_BLUE);
-//
-//			else if (!strcmp(bg_color, Colors[2]))
-//				set_PixelVals(ppm, position, PIXEL_LIGHT_BLUE);
-//
-//			else if (!strcmp(bg_color, Colors[3]))
-//				set_PixelVals(ppm, position, PIXEL_RED);
-//
-//			else if (!strcmp(bg_color, Colors[4]))
-//				set_PixelVals(ppm, position, PIXEL_PURPLE);
-//
-//			else if (!strcmp(bg_color, Colors[5]))
-//				set_PixelVals(ppm, position, PIXEL_YELLOW);
-//
-//			else if (!strcmp(bg_color, Colors[6]))
-//				set_PixelVals(ppm, position, PIXEL_WHITE);
-//
-//			else if (!strcmp(bg_color, Colors[7]))
-//				set_PixelVals(ppm, position, PIXEL_BLACK);
-//
-//			else if (!strcmp(bg_color, Colors[8]))
-//				set_PixelVals(ppm, position, PIXEL_GRAY);
-
-
-				set_PixelVals(ppm, position, rgb);
-//				set_PixelVals(ppm, position, PIXEL_PURPLE);
-
-//			set_PixelVals(ppm, position, 100, 0, 0);
-//			ppm->pixels[position].r = default_pixel_val;
-//			ppm->pixels[position].g = default_pixel_val;
-//			ppm->pixels[position].b = default_pixel_val;
-//			ppm->pixels[position].b = ((int) pgm->grays[position] * (int) rgb[2]) / 100;
+			set_PixelVals(ppm, position, rgb);
 
 			position ++;
 

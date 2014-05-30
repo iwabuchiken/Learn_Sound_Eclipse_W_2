@@ -89,60 +89,127 @@ void log_Command_Input(int argc, char **argv)
     char joint = ' ';
     
     char *argv_str = join(joint, argv, argc);
-    
+
+    char *argv_title = "<argv>";
+
+    /*********************************
+	 * argv
+	**********************************/
+
+
+    int len = strlen(argv_str) + strlen(argv_title);
+
+    char *label_argv = (char *) malloc(sizeof(char) * (len + 3));
+
+    sprintf(label_argv, "%s %s\n", argv_title, argv_str);
+
+    label_argv[len + 2] = '\0';
+
+//    char *label_argv = "<argv> ";
+//    char *label_argc = "<argc> ";
+
+    /*********************************
+	 * argc
+	**********************************/
+    char label_argc[11];
+
+    sprintf(label_argc, "%s %d\n", "<argc>", argc);
+
+    /*********************************
+	 * Build: message
+	**********************************/
+    int len_strings = 2;
+
+    char **tmp = (char **) malloc(sizeof(char *) * len_strings);
+
+    tmp[0] = label_argv;
+    tmp[1] = label_argc;
+
+    char *full_string = join_simple(tmp, len_strings);
+
+
+	write_Log(__FILE__, __LINE__, full_string);
+
+
+//    char label_full[20];
+//
+//    int len = strlen(label_argv) + strlen(label_argc);
+
+
+
+
+    //    fprintf(fp, "%s\n", "<argv>");
+    //
+    //    // argc
+    //    fprintf(fp, "argc=%d: ", argc);
+    //
+
+
+
+
+//	char *tmp_str = "<ppm file saved>";
+//
+//	int len = strlen(file_dst_ppm) + strlen(tmp_str);
+//
+//	char *message = (char *) malloc(sizeof(char) * (len + 2));
+//
+//	sprintf(message, "%s %s", tmp_str, file_dst_ppm);
+//
+//	message[len + 1] = '\0';
+
 //    //log
 //	printf("[%s : %d] argv_str => %s\n",
 //			base_name(__FILE__), __LINE__, argv_str);
 
 
-    FILE *fp;
-    
-    /*********************************
-	 * File: open
-	**********************************/
+//    FILE *fp;
+//
+//    /*********************************
+//	 * File: open
+//	**********************************/
+////    //log
+////	printf("[%s : %d] Opening file => %s\n",
+////			base_name(__FILE__), __LINE__, LOG_FILE_PATH);
+//
+//    if((fp = fopen(LOG_FILE_PATH, "a")) == NULL) {
+//
+//        //log
+//        printf("[%s : %d] Can't open the log file: %s\n",
+//                base_name(__FILE__), __LINE__, LOG_FILE_PATH);
+//
+//        exit(-1);
+//
+//    }
+//
 //    //log
-//	printf("[%s : %d] Opening file => %s\n",
+//	printf("[%s : %d] File => opened: %s\n",
 //			base_name(__FILE__), __LINE__, LOG_FILE_PATH);
-
-    if((fp = fopen(LOG_FILE_PATH, "a")) == NULL) {
-        
-        //log
-        printf("[%s : %d] Can't open the log file: %s\n", 
-                base_name(__FILE__), __LINE__, LOG_FILE_PATH);
-        
-        exit(-1);
-
-    }
-
-    //log
-	printf("[%s : %d] File => opened: %s\n",
-			base_name(__FILE__), __LINE__, LOG_FILE_PATH);
-
-
-    /*********************************
-	 * File: write
-	**********************************/
-    //REF fprintf http://www.tutorialspoint.com/c_standard_library/c_function_fprintf.htm
-    fprintf(fp, "[%s]\n", time_label);
-    
-    fprintf(fp, "%s\n", "<argv>");
-    
-    // argc
-    fprintf(fp, "argc=%d: ", argc);
-    
-    fprintf(fp, "%s\n", argv_str);
-    
-    //REF fputc http://www.cplusplus.com/reference/cstdio/fputc/
-    fputc('\n', fp);
-
-    /*********************************
-	 * File: close
-	**********************************/
-    fclose(fp);
-    
-    //log
-    printf("[%s : %d] file => closed: %s\n", 
-            base_name(__FILE__), __LINE__, LOG_FILE_PATH);
+//
+//
+//    /*********************************
+//	 * File: write
+//	**********************************/
+//    //REF fprintf http://www.tutorialspoint.com/c_standard_library/c_function_fprintf.htm
+//    fprintf(fp, "[%s]\n", time_label);
+//
+//    fprintf(fp, "%s\n", "<argv>");
+//
+//    // argc
+//    fprintf(fp, "argc=%d: ", argc);
+//
+//    fprintf(fp, "%s\n", argv_str);
+//
+//    //REF fputc http://www.cplusplus.com/reference/cstdio/fputc/
+//    fputc('\n', fp);
+//
+//    /*********************************
+//	 * File: close
+//	**********************************/
+//    fclose(fp);
+//
+//    //log
+//    printf("[%s : %d] file => closed: %s\n",
+//            base_name(__FILE__), __LINE__, LOG_FILE_PATH);
 
 }
 

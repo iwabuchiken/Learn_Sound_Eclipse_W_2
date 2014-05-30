@@ -34,6 +34,14 @@
 #include "../include/methods.h"
 #endif
 
+/*********************************
+ * functions used
+ *
+ * log_Command_Input	: methods.c
+ * write_Log			: methods.c
+**********************************/
+
+
 /////////////////////////////////////
 
 // vars

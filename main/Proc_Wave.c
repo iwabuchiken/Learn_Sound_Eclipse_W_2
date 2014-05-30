@@ -59,8 +59,20 @@ char *operation;
 int save_file = true;
 
 char *op_names[] = {
-		"wave-to-ppm"
+
+		"wave-to-ppm",
+		NULL
 };
+
+char *ppm_file_dst;
+
+int ppm_size[2] = {255, 255};
+int max_bright = 255;
+
+char *bg_color;
+
+PPM *ppm;
+
 
 /////////////////////////////////////
 
@@ -78,6 +90,12 @@ void Proc_Wave__SaveWave(void);
 void Proc_Wave__ReadWave(void);
 
 void Proc_Wave__Analyze(void);
+void Proc_Wave__Op_Dispatch(void);
+
+// Op: wave to ppm
+void _op_Wave2PPM(void);
+void build_PPM_Header_Wave(void);
+void build_PPM_Pixels_Wave(void);
 
 /////////////////////////////////////
 
@@ -108,7 +126,7 @@ void Proc_Wave(int argc, char **argv)
 	/*********************************
 	 * Operations
 	**********************************/
-//	Proc_Wave__Op();
+	Proc_Wave__Op_Dispatch();
 
 	/*********************************
 	 * Save: wav file
@@ -243,18 +261,9 @@ void _Setup_Options_ProcWave__Dst(char **argv) {
 
 	}
 
-
-	consolColor_Change(GREEN);
-	//log
-	printf("[%s : %d] file_dst_wave => %s\n",
-			(char *) base_name(__FILE__), __LINE__, file_dst_wave);
-
-	consolColor_Reset();
-
-}//void _Setup_Options_ProcWave__Dst(char **argv)
-
-void Proc_Wave__SaveWave()
-{
+	/*********************************
+	 * Add: time string
+	**********************************/
 	char delim = '.';
 
 	int position = 1; int num_of_tokens;
@@ -281,13 +290,53 @@ void Proc_Wave__SaveWave()
 
 	file_dst_wave = file_dst;
 
+
+	consolColor_Change(GREEN);
+	//log
+	printf("[%s : %d] file_dst_wave => %s\n",
+			(char *) base_name(__FILE__), __LINE__, file_dst_wave);
+
+	consolColor_Reset();
+
+}//void _Setup_Options_ProcWave__Dst(char **argv)
+
+void Proc_Wave__SaveWave()
+{
+//	char delim = '.';
+//
+//	int position = 1; int num_of_tokens;
+//
+//	char **tokens = (char **) str_split_r_2
+//			(file_dst_wave, delim, position, &num_of_tokens);
+//
+//	int tmp_i = 4;
+//
+//	char **tmp = (char **) malloc(sizeof(char *) * tmp_i);
+//
+//	tmp[0] = tokens[0];
+//	tmp[1] = "_";
+//	tmp[2] = get_TimeLabel_Now(SERIAL);
+//	tmp[3] = ".wav";
+////	tmp[0] = "./audio/";
+////	tmp[1] = "b_";
+////	tmp[2] = get_TimeLabel_Now(SERIAL);
+////	tmp[3] = ".wav";
+//
+//	char *file_dst = join_simple(tmp, tmp_i);
+//
+//	free(file_dst_wave);
+//
+//	file_dst_wave = file_dst;
+
 	mono_wave_write(&pcm1, file_dst_wave); /* WAVEファイルにモノラルの音データを出力する */
 //	mono_wave_write(&pcm1, file_dst_wave); /* WAVEファイルにモノラルの音データを出力する */
 //	mono_wave_write(&pcm1, file_dst); /* WAVEファイルにモノラルの音データを出力する */
 //	mono_wave_write(&pcm1, "b.wav"); /* WAVEファイルにモノラルの音データを出力する */
 
 	//log
-	printf("[%s : %d] wave => written: %s\n", base_name(__FILE__), __LINE__, file_dst);
+	printf("[%s : %d] wave => written: %s\n",
+			base_name(__FILE__), __LINE__, file_dst_wave);
+//	printf("[%s : %d] wave => written: %s\n", base_name(__FILE__), __LINE__, file_dst);
 
 }
 
@@ -403,6 +452,37 @@ void _Setup_Options_ProcWave__Op(char **argv, int argc)
 
 	operation = (char *) get_Opt_Value(argv, opt_key_Op);
 
+	/*********************************
+	 * Validate
+	**********************************/
+	int tmp_i = 0;
+	while(*(op_names + tmp_i)) tmp_i ++;
+
+	int res_i = is_InArray(operation, op_names, tmp_i);
+
+	if (res_i == false) {
+
+		consolColor_Change(RED);
+
+		//log
+		printf("[%s : %d] op name is '%s' => not in the list\n",
+					base_name(__FILE__), __LINE__);
+
+		consolColor_Reset();
+
+		char *tmp_str = join(',', op_names, tmp_i);
+
+		//log
+		printf("[%s : %d] Available op names => %s\n",
+				base_name(__FILE__), __LINE__, tmp_str);
+
+		exit(-1);
+
+	}
+
+	/*********************************
+	 * Report
+	**********************************/
 	consolColor_Change(GREEN);
 
 	//log
@@ -410,6 +490,149 @@ void _Setup_Options_ProcWave__Op(char **argv, int argc)
 				base_name(__FILE__), __LINE__, operation);
 
 	consolColor_Reset();
+
+
+}
+
+void Proc_Wave__Op_Dispatch(void)
+{
+	if (!strcmp(operation, op_names[0])) {	// wave-to-ppm
+
+		_op_Wave2PPM();
+
+	} else {
+
+	}
+
+}//void Proc_Wave__Op_Dispatch(void)
+
+void _op_Wave2PPM(void)
+{
+
+	/*********************************
+	 * Build: PPM header
+	**********************************/
+	build_PPM_Header_Wave();
+
+	//log
+	printf("[%s : %d] PPM header => created\n", base_name(__FILE__), __LINE__);
+
+	/*********************************
+	 * Build: PPM pixels
+	**********************************/
+	build_PPM_Pixels_Wave();
+
+	//log
+	printf("[%s : %d] PPM pixels => created\n", base_name(__FILE__), __LINE__);
+
+	/*********************************
+	 * dst file path
+	**********************************/
+	char delim = '.';
+
+	int position = 1; int num_of_tokens;
+
+	char **tokens = (char **) str_split_r_2
+			(file_dst_wave, delim, position, &num_of_tokens);
+
+	int tmp_i = 2;
+
+	char **tmp = (char **) malloc(sizeof(char *) * tmp_i);
+
+	tmp[0] = tokens[0];
+	tmp[1] = ".ppm";
+
+	char *file_dst_ppm = join_simple(tmp, tmp_i);
+
+	/*********************************
+	 * Save: ppm file
+	**********************************/
+	int res_i = save_PPM(file_dst_ppm, ppm);
+
+	if (res_i == 1) {
+
+		consolColor_Change(GREEN);
+
+		//log
+		printf("[%s : %d] PPM => saved: %s\n",
+					base_name(__FILE__), __LINE__, file_dst_ppm);
+
+		consolColor_Reset();
+
+
+	} else {
+
+		consolColor_Change(RED);
+
+		//log
+		printf("[%s : %d] PPM => not saved: %s\n",
+					base_name(__FILE__), __LINE__, file_dst_ppm);
+
+		consolColor_Reset();
+
+
+	}
+
+	/*********************************
+	 * Free: ppm
+	**********************************/
+	free(ppm);
+
+	/*********************************
+	 * Record: execution infos
+	**********************************/
+	char *tmp_str = "<ppm file saved>";
+
+	int len = strlen(file_dst_ppm) + strlen(tmp_str);
+
+	char *message = (char *) malloc(sizeof(char) * (len + 2));
+
+	sprintf(message, "%s %s", tmp_str, file_dst_ppm);
+
+	message[len + 1] = '\0';
+
+	write_Log(__FILE__, __LINE__, message);
+
+
+}//void _op_Wave2PPM(void)
+
+void build_PPM_Header_Wave()
+{
+	ppm = (PPM *) malloc(sizeof(PPM) * 1);
+
+	strcpy(ppm->format, "P6");
+
+	ppm->format[2] = '\0';
+
+	ppm->x = ppm_size[0];
+	ppm->y = ppm_size[1];
+
+	ppm->max_brightness = max_bright;
+
+}
+
+void build_PPM_Pixels_Wave()
+{
+    int position = 0;
+
+    int i, j;
+
+    int num_of_pixels = ppm->x * ppm->y;
+
+    ppm->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
+
+    int rgb[3] = {PIXEL_BLUE};
+
+    for (i = 0; i < ppm->y; ++i) {
+
+		for (j = 0; j < ppm->x; ++j) {
+
+			set_PixelVals(ppm, position, rgb);	// set_PixelVals() : ppmlib.c
+
+			position ++;
+
+		}
+    }
 
 
 }

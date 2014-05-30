@@ -123,7 +123,9 @@ void build_PPM_Pixels_WaveData(void);
 void build_PPM_Pixels_Image(void);
 void build_PPM_Rotate_Image(void);
 int build_PPM_Rotate_Image__PosConv
-(int pos_A, int A_width, int A_height);
+(int pos_A, int A_width, int A_height, int B_width, int B_height);
+//(int pos_A, int A_width, int A_height, int B_height);
+//(int pos_A, int A_width, int A_height);
 
 /////////////////////////////////////
 
@@ -785,14 +787,23 @@ void build_PPM_Rotate_Image(void)
 
 	int i, j;
 
+//	for (i = 0; i < 4; ++i) {
 //	for (i = 0; i < 3; ++i) {
 	for (i = 0; i < ppm_A->y; ++i) {
 
 //		for (j = 0; j < 3; ++j) {
+//		for (j = 0; j < 3; ++j) {
 		for (j = 0; j < ppm_A->x; ++j) {
 //		for (j = 0; j < pixel_data[i]; ++j) {
 
-			pos_B = build_PPM_Rotate_Image__PosConv(pos_A, ppm_A->x, ppm_A->y);
+			pos_B = build_PPM_Rotate_Image__PosConv(
+						pos_A, ppm_A->x, ppm_A->y, ppm_B->x, ppm_B->y);
+//			pos_B = build_PPM_Rotate_Image__PosConv(pos_A, 4, 3, 3, 4);
+//			pos_B = build_PPM_Rotate_Image__PosConv(pos_A, ppm_A->x, ppm_A->y);
+			//log
+//			printf("[%s : %d] pos_A = %d / pos_B = %d\n",
+//					base_name(__FILE__), __LINE__, pos_A, pos_B);
+
 //			pos_B = build_PPM_Rotate_Image__PosConv(pos_A, 3, 3);
 
 			ppm_B->pixels[pos_B].r = ppm_A->pixels[pos_A].r;
@@ -847,7 +858,7 @@ void build_PPM_Rotate_Image(void)
 }//void build_PPM_Rotate_Image(void)
 
 int build_PPM_Rotate_Image__PosConv
-(int pos_A, int A_width, int A_height)
+(int pos_A, int A_width, int A_height, int B_width, int B_height)
 {
 
 	int pos_B;
@@ -858,9 +869,10 @@ int build_PPM_Rotate_Image__PosConv
 	int div = pos_A / A_width;
 
 	int B_X = div;
-	int B_Y = (A_height - 1) - res;
+	int B_Y = (B_height - 1) - res;
 
-	pos_B = B_Y * A_width + B_X;
+	pos_B = B_Y * B_width + B_X;
+//	pos_B = B_Y * A_width + B_X;
 
 	return pos_B;
 

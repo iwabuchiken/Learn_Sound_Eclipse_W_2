@@ -83,7 +83,8 @@ void Gen_PPM2(int argc, char **argv)
 	/*********************************
 	 * Save: ppm file
 	**********************************/
-	int res_i = save_PPM(ppm_file_dst, ppm_A2);
+	int res_i = save_PPM2(ppm_file_dst, ppm_A2);
+//	int res_i = save_PPM(ppm_file_dst, ppm_A2);
 //	int res_i = save_PPM(ppm_file_dst, ppm_A);
 
 	if (res_i == 1) {
@@ -342,7 +343,7 @@ void build_PPM_Pixels2(void)
 		for (j = 0; j < ppm_A2->x; ++j) {
 
 			ppm_A2->pixels[i][j].r = 100;
-			ppm_A2->pixels[i][j].g = 0;
+			ppm_A2->pixels[i][j].g = 100;
 			ppm_A2->pixels[i][j].b = 0;
 
 //			pixel *pix = (pixel *) malloc(sizeof(pixel) * 1);

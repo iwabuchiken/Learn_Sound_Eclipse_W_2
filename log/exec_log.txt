@@ -1325,3 +1325,13 @@ argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\
 <argc> 11
 
 
+[2014:05:31 00:50:29] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0_8.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:31 00:51:51] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0_9.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+

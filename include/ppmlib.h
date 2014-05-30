@@ -88,6 +88,7 @@ char *Colors[];
      * Prototypes
      *******************************/
     int save_PPM(char *, PPM *);
+    int save_PPM2(char *, PPM2 *);
     
 //    char * conv_DstFile_Name(void);
 

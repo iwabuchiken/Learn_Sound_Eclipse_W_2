@@ -156,9 +156,14 @@ void Proc_Wave(int argc, char **argv)
 void _Setup_Options_ProcWave(int argc, char **argv)
 {
 	/*********************************
-	 * Opt: size
+	 * Opt: src
 	**********************************/
 	_Setup_Options_ProcWave__Src(argv);
+
+	/*********************************
+	 * Opt: size
+	**********************************/
+	_Setup_Options_ProcWave__Size(argv, argc);
 
 	/*********************************
 	 * Opt: dst
@@ -873,7 +878,6 @@ void build_PPM_DstFile(void)
 
 	sprintf(str_size, "%d,%d", ppm_size[0], ppm_size[1]);
 
-
 	/*********************************
 	 * Build: full string
 	**********************************/
@@ -889,3 +893,93 @@ void build_PPM_DstFile(void)
 	file_dst_ppm = join_simple(tmp, tmp_i);
 
 }//void build_PPM_DstFile(void)
+
+void _Setup_Options_ProcWave__Size(char **argv, int argc)
+{
+	char *opt_key_Size = "-size";
+
+	/*********************************
+	 * Validate: optioni given?
+	**********************************/
+	int res_i = option_Exists(argv, argc, opt_key_Size);
+
+	if (res_i == false) {
+
+		return;
+
+	}
+
+	/*********************************
+	 * Get: option value
+	**********************************/
+	char *opt_val_Size = (char *) get_Opt_Value(argv, opt_key_Size);
+
+	char delim = ',';
+
+	int position = 1; int num_of_tokens;
+
+	char **tokens = (char **) str_split_r_2
+			(opt_val_Size, delim, position, &num_of_tokens);
+
+	int i;
+
+	for(i = 0; i < 2; i++) {
+
+		if(!is_Numeric(tokens[i])) {
+
+			consolColor_Change(RED);
+
+			//log
+			printf("[%s : %d] size is not numeric => (%s) : %s\n",
+						base_name(__FILE__), __LINE__,
+						tokens[i], (i == 0 ? "width" : "height"));
+
+			consolColor_Reset();
+
+			exit(-1);
+
+		} else {
+
+			ppm_size[i] = atoi(tokens[i]);
+
+			/*********************************
+			 * Validate: > PPM_MAX_SIZE?
+			**********************************/
+			if (ppm_size[i] > PPM_MAX_SIZE) {
+
+				consolColor_Change(RED);
+
+				//log
+				printf("[%s : %d] size is %d => more than max (%d)\n",
+							base_name(__FILE__), __LINE__,
+							ppm_size[i], PPM_MAX_SIZE);
+
+				consolColor_Reset();
+
+				exit(-1);
+
+			} else if (ppm_size[i] < PPM_MIN_SIZE) {
+
+				consolColor_Change(RED);
+
+				//log
+				printf("[%s : %d] size is %d => less than min (%d)\n",
+							base_name(__FILE__), __LINE__,
+							ppm_size[i], PPM_MIN_SIZE);
+
+				consolColor_Reset();
+
+				exit(-1);
+
+			}
+
+			//log
+			printf("[%s : %d] size  => %d : %s\n",
+						base_name(__FILE__), __LINE__,
+						ppm_size[i], (i == 0 ? "width" : "height"));
+
+		}//if(!is_Numeric(tokens[i]))
+
+	}//for(i = 0; i < 2; i++)
+
+}//void _Setup_Options_ProcWave__Size(char **argv)

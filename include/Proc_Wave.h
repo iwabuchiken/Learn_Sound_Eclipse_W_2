@@ -58,6 +58,8 @@
 //#define DEFALUT_PPM_WIDTH 255
 //#define DEFALUT_PPM_HEIGHT 255
 
+#define PPM_MAX_SIZE		500
+#define PPM_MIN_SIZE		255
 
 /////////////////////////////////////
 
@@ -69,6 +71,8 @@ void _Setup_Options_ProcWave__Src(char **argv);
 void _Setup_Options_ProcWave__Dst(char **argv);
 void _Setup_Options_ProcWave__SaveFile(char **argv, int argc);
 void _Setup_Options_ProcWave__Op(char **argv, int argc);
+void _Setup_Options_ProcWave__Size(char **argv, int argc);
+
 
 void Proc_Wave(int argc, char **argv);
 void Proc_Wave__SaveWave(void);

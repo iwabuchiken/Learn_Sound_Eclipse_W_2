@@ -38,23 +38,28 @@ void show_help(void)
     "\n"
 
 	"<Options>\n"
-    "\t-bg\t"
-    		"background color\n"
-    		"\t\tred, green, blue, purple, white, black, gray"
+    "\t-bg\n"
+    		"\t\t" "background color\n"
+    		"\t\t" "red, green, blue, purple, white, black, gray" "\n"
 
-    "\n"
+    "\t-dst\n"
+    		"\t\t" "dst file name\n"
+    		"\t\t" "e.g. images\\test.ppm" "\n"
 
-    "\t-dst\t"
-    		"dst file name\n"
-    		"\t\te.g. images\\test.ppm"
+    "\t-bright\n"
+    		"\t\t" "max brightness in the ppm file\n"
+    		"\t\t" "If not given, the value is set to the default of 255\n"
+    		"\t\t" "e.g. 255\n"
 
-    "\t-bright\t"
-    		"max brightness in the ppm file\n"
-    		"If not given, the value is set to the default of 255\n"
-    		"\t\te.g. 255"
+	"\t-save\n"
+    		"\t\t" "save a generate wave file\n"
 
-	"\t-save\t"
-    		"save a generate wave file\n"
+	"\t-size\n"
+    		"\t\t" "size of the ppm file (in pixel)\n"
+    		"\t\t" "e.g. -size 255,500 (height, width)\n"
+    		"\t\t" "notice => order is height first, not width\n"
+
+    		"\t\t" "minimu is 255, max is 500" "\n"
 
     ;
 

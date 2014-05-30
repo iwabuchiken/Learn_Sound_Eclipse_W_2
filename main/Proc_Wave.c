@@ -49,8 +49,9 @@
 // defines
 
 /////////////////////////////////////
-#define DEFALUT_PPM_WIDTH 500
+#define DEFALUT_PPM_WIDTH 300
 #define DEFALUT_PPM_HEIGHT 500
+//#define DEFALUT_PPM_HEIGHT 500
 //#define DEFALUT_PPM_WIDTH 255
 //#define DEFALUT_PPM_HEIGHT 255
 
@@ -94,7 +95,8 @@ PPM *ppm_A;
 PPM *ppm_B;
 
 // Pixel values converted from wave data: 0-255
-int pixel_data[DEFALUT_PPM_WIDTH];
+int pixel_data[DEFALUT_PPM_HEIGHT];
+//int pixel_data[DEFALUT_PPM_WIDTH];
 
 /////////////////////////////////////
 
@@ -668,8 +670,10 @@ void op_Wave2PPM__Header_Wave()
 
 	ppm_B->format[2] = '\0';
 
-	ppm_B->x = ppm_size[0];
-	ppm_B->y = ppm_size[1];
+	ppm_B->x = ppm_size[1];
+	ppm_B->y = ppm_size[0];
+//	ppm_B->x = ppm_size[0];
+//	ppm_B->y = ppm_size[1];
 
 	ppm_B->max_brightness = max_bright;
 
@@ -724,7 +728,8 @@ void op_Wave2PPM__Pixels_Wave()
 void build_PPM_Pixels_WaveData(void)
 {
 
-	int num_of_data = DEFALUT_PPM_WIDTH;
+	int num_of_data = DEFALUT_PPM_HEIGHT;
+//	int num_of_data = DEFALUT_PPM_WIDTH;
 //	int num_of_data = 255;
 
 	int i;
@@ -734,6 +739,7 @@ void build_PPM_Pixels_WaveData(void)
 //	pixel_data[num_of_data];
 //	int pixel_data[num_of_data];
 
+//	int offset = 0;
 	int offset = 10000;
 
 	for (i = 0; i < num_of_data; ++i) {
@@ -772,11 +778,6 @@ void build_PPM_Pixels_Image(void)
 
 		}
 	}
-
-	/*********************************
-	 * Rotate image
-	**********************************/
-
 
 }//void build_PPM_Pixels_Image(void)
 

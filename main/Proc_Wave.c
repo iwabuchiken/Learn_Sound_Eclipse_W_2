@@ -5,68 +5,54 @@
  *      Author: iwabuchik
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
-#include <unistd.h>
-
-/*********************************
- * includes
- *
- * main.h	lib.h		ppmlib.h
- * wave.h	methods.h
- *
-**********************************/
-
-#ifndef MAIN_H_
-#include "../include/main.h"
-#endif
-
-//#ifndef LIB_H
-//#include "../include/lib.h"
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdarg.h>
+//#include <string.h>
+//#include <unistd.h>
+//
+///*********************************
+// * includes
+// *
+// * main.h	lib.h		ppmlib.h
+// * wave.h	methods.h
+// *
+//**********************************/
+//
+//#ifndef MAIN_H_
+//#include "../include/main.h"
+//#endif
+//
+////#ifndef LIB_H
+////#include "../include/lib.h"
+////#endif
+//
+//#ifndef PPMLIB_H
+//#include "../include/ppmlib.h"
+//#endif
+//
+//#ifndef WAVE_H
+////#define WAVE_H
+//#include "../include/wave.h"
+//#endif
+//
+////#ifndef IMG_LIB_H
+////#include "../include/img_lib.h"
+////#endif
+//
+//#ifndef METHODS_H
+//#include "../include/methods.h"
 //#endif
 
-#ifndef PPMLIB_H
-#include "../include/ppmlib.h"
+#ifndef GEN_PPM_H_
+#include "../include/Proc_Wave.h"
 #endif
 
-#ifndef WAVE_H
-//#define WAVE_H
-#include "../include/wave.h"
-#endif
-
-//#ifndef IMG_LIB_H
-//#include "../include/img_lib.h"
-//#endif
-
-#ifndef METHODS_H
-#include "../include/methods.h"
-#endif
-
-/////////////////////////////////////
-
-// defines
-
-/////////////////////////////////////
-#define DEFALUT_PPM_WIDTH 300
-#define DEFALUT_PPM_HEIGHT 500
-//#define DEFALUT_PPM_HEIGHT 500
-//#define DEFALUT_PPM_WIDTH 255
-//#define DEFALUT_PPM_HEIGHT 255
-
-/////////////////////////////////////
-
-// global vars
-
-/////////////////////////////////////
-MONO_PCM pcm0, pcm1;
-
-char *file_src_wave;
-char *file_dst_wave;
-
-char *operation;	// 1. name of the operation to be conducted
-					// 2. The name will be one of those in "op_names" array
+///////////////////////////////////////
+//
+//// global vars
+//
+///////////////////////////////////////
 
 int save_file = true;	// if true, a new wave file will be saved
 						//	with the name given in '-dst' optoin
@@ -79,55 +65,42 @@ char *op_names[] = {
 						//	size of it as well.
 };
 
-char *ppm_file_dst;
-
 // The size of the ppm file that will display the wave form of the audio data
 int ppm_size[2] = {DEFALUT_PPM_WIDTH, DEFALUT_PPM_HEIGHT};
 
 // Max brightness value for the ppm file
 int max_bright = 255;
 
-// 1. Background color for the ppm file
-// 2. The value will be one of those in Colors:ppmlib.c
-char *bg_color;
-
-PPM *ppm_A;
-PPM *ppm_B;
-
-// Pixel values converted from wave data: 0-255
-int pixel_data[DEFALUT_PPM_HEIGHT];
-//int pixel_data[DEFALUT_PPM_WIDTH];
-
-/////////////////////////////////////
-
-// prototypes
-
-/////////////////////////////////////
-void _Setup_Options_ProcWave(int argc, char **argv);
-void _Setup_Options_ProcWave__Src(char **argv);
-void _Setup_Options_ProcWave__Dst(char **argv);
-void _Setup_Options_ProcWave__SaveFile(char **argv, int argc);
-void _Setup_Options_ProcWave__Op(char **argv, int argc);
-
-void Proc_Wave(int argc, char **argv);
-void Proc_Wave__SaveWave(void);
-void Proc_Wave__ReadWave(void);
-
-void Proc_Wave__Analyze(void);
-void Proc_Wave__Op_Dispatch(void);
-
-// Op: wave to ppm
-void op_Wave2PPM(void);
-void op_Wave2PPM__Header_Wave(void);
-void op_Wave2PPM__Pixels_Wave(void);
-void build_PPM_Pixels_WaveData(void);
-
-void build_PPM_Pixels_Image(void);
-void build_PPM_Rotate_Image(void);
-int build_PPM_Rotate_Image__PosConv
-(int pos_A, int A_width, int A_height, int B_width, int B_height);
-//(int pos_A, int A_width, int A_height, int B_height);
-//(int pos_A, int A_width, int A_height);
+///////////////////////////////////////
+//
+//// prototypes
+//
+///////////////////////////////////////
+//void _Setup_Options_ProcWave(int argc, char **argv);
+//void _Setup_Options_ProcWave__Src(char **argv);
+//void _Setup_Options_ProcWave__Dst(char **argv);
+//void _Setup_Options_ProcWave__SaveFile(char **argv, int argc);
+//void _Setup_Options_ProcWave__Op(char **argv, int argc);
+//
+//void Proc_Wave(int argc, char **argv);
+//void Proc_Wave__SaveWave(void);
+//void Proc_Wave__ReadWave(void);
+//
+//void Proc_Wave__Analyze(void);
+//void Proc_Wave__Op_Dispatch(void);
+//
+//// Op: wave to ppm
+//void op_Wave2PPM(void);
+//void op_Wave2PPM__Header_Wave(void);
+//void op_Wave2PPM__Pixels_Wave(void);
+//void build_PPM_Pixels_WaveData(void);
+//
+//void build_PPM_Pixels_Image(void);
+//void build_PPM_Rotate_Image(void);
+//int build_PPM_Rotate_Image__PosConv
+//(int pos_A, int A_width, int A_height, int B_width, int B_height);
+////(int pos_A, int A_width, int A_height, int B_height);
+////(int pos_A, int A_width, int A_height);
 
 /////////////////////////////////////
 
@@ -136,9 +109,6 @@ int build_PPM_Rotate_Image__PosConv
 /////////////////////////////////////
 void Proc_Wave(int argc, char **argv)
 {
-//	MONO_PCM pcm0, pcm1;
-//	int n;
-
 	/*********************************
 	 * Options
 	**********************************/
@@ -578,21 +548,23 @@ void op_Wave2PPM(void)
 	/*********************************
 	 * dst file path
 	**********************************/
-	char delim = '.';
+	build_PPM_DstFile();
 
-	int position = 1; int num_of_tokens;
-
-	char **tokens = (char **) str_split_r_2
-			(file_dst_wave, delim, position, &num_of_tokens);
-
-	int tmp_i = 2;
-
-	char **tmp = (char **) malloc(sizeof(char *) * tmp_i);
-
-	tmp[0] = tokens[0];
-	tmp[1] = ".ppm";
-
-	char *file_dst_ppm = join_simple(tmp, tmp_i);
+//	char delim = '.';
+//
+//	int position = 1; int num_of_tokens;
+//
+//	char **tokens = (char **) str_split_r_2
+//			(file_dst_wave, delim, position, &num_of_tokens);
+//
+//	int tmp_i = 2;
+//
+//	char **tmp = (char **) malloc(sizeof(char *) * tmp_i);
+//
+//	tmp[0] = tokens[0];
+//	tmp[1] = ".ppm";
+//
+//	file_dst_ppm = join_simple(tmp, tmp_i);
 
 	/*********************************
 	 * Save: ppm file
@@ -882,3 +854,38 @@ int build_PPM_Rotate_Image__PosConv
 //			base_name(__FILE__), __LINE__, pos_A, pos_B);
 
 }
+
+void build_PPM_DstFile(void)
+{
+	char delim = '.';
+
+	int position = 1; int num_of_tokens;
+
+	char **tokens = (char **) str_split_r_2
+			(file_dst_wave, delim, position, &num_of_tokens);
+
+	/*********************************
+	 * Add label: size
+	**********************************/
+	char *label_size = "_size=";
+
+	char *str_size = (char *) malloc(sizeof(char) * 7);
+
+	sprintf(str_size, "%d,%d", ppm_size[0], ppm_size[1]);
+
+
+	/*********************************
+	 * Build: full string
+	**********************************/
+	int tmp_i = 4;
+
+	char **tmp = (char **) malloc(sizeof(char *) * tmp_i);
+
+	tmp[0] = tokens[0];
+	tmp[1] = label_size;
+	tmp[2] = str_size;
+	tmp[3] = ".ppm";
+
+	file_dst_ppm = join_simple(tmp, tmp_i);
+
+}//void build_PPM_DstFile(void)

@@ -1222,3 +1222,96 @@ argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\
 [2014:05:30 21:21:28] [..\main\Proc_Wave.c : 622]
 <ppm file saved> audio\b_3.2_20140530_212128_size=255,300.ppm
 
+[2014:05:30 23:11:13] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b_3.2.wav -op wave-to-ppm -size 255,300
+<argc> 11
+
+
+[2014:05:30 23:11:13] [..\main\Proc_Wave.c : 622]
+<ppm file saved> audio\b_3.2_20140530_231113_size=255,300.ppm
+
+[2014:05:30 23:38:49] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test_D-5_v-4-0.ppm -size 255,255
+<argc> 7
+
+
+[2014:05:30 23:39:28] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255
+<argc> 9
+
+
+[2014:05:30 23:39:49] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:41:47] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:42:11] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:44:54] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:46:06] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:48:46] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:49:24] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:50:03] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:51:09] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:53:32] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0_1.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:54:20] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0_1.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:30 23:55:49] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0_2.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:31 00:02:56] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0_3.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:31 00:20:35] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0_4.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+
+[2014:05:31 00:23:16] [..\utils\methods.c : 136]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0_5.ppm -size 255,255 -bright 255 -bg gray
+<argc> 11
+
+

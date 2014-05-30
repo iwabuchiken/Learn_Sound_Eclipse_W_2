@@ -56,6 +56,21 @@ typedef struct {
 
 } PPM;
 
+typedef struct {
+
+    gray x;	// width
+    gray y;	// height
+
+    gray max_brightness;
+
+    char format[3];
+
+    char *file_name;
+
+    pixel **pixels;	//
+
+} PPM2;
+
 /*******************************
  * Prototypes
  *******************************/

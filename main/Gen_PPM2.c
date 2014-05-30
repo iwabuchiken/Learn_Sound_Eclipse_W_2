@@ -342,9 +342,23 @@ void build_PPM_Pixels2(void)
 
 		for (j = 0; j < ppm_A2->x; ++j) {
 
-			ppm_A2->pixels[i][j].r = 100;
-			ppm_A2->pixels[i][j].g = 100;
-			ppm_A2->pixels[i][j].b = 0;
+//			pixel pix = (pixel) ppm_A2->pixels[i][j];
+//			pixel *pix = (pixel *) ppm_A2->pixels[i][j]; // cannot convert to a pointer type
+//			pixel pix = ppm_A2->pixels[i][j];
+
+			//REF pnglib.c : 2641
+			pixel *pix = &(ppm_A2->pixels[i][j]);
+//			pixel pix = &(ppm_A2->pixels[i][j]); // invalid initializer
+
+			pix->r = 100;
+			pix->g = 0;
+			pix->b = 100;
+//			pix.r = 100;
+//			pix.g = 0;
+//			pix.b = 100;
+//			ppm_A2->pixels[i][j].r = 100;
+//			ppm_A2->pixels[i][j].g = 100;
+//			ppm_A2->pixels[i][j].b = 0;
 
 //			pixel *pix = (pixel *) malloc(sizeof(pixel) * 1);
 //			pixel pix = (pixel) malloc(sizeof(pixel) * 1); // conversion to non-scalar type requested

@@ -52,7 +52,7 @@ int max_bright;
 
 char *bg_color;
 
-PPM *ppm;
+PPM *ppm_A;
 
 void Gen_PPM(int argc, char **argv)
 {
@@ -77,7 +77,7 @@ void Gen_PPM(int argc, char **argv)
 	/*********************************
 	 * Save: ppm file
 	**********************************/
-	int res_i = save_PPM(ppm_file_dst, ppm);
+	int res_i = save_PPM(ppm_file_dst, ppm_A);
 
 	if (res_i == 1) {
 
@@ -106,7 +106,7 @@ void Gen_PPM(int argc, char **argv)
 	/*********************************
 	 * Free: ppm
 	**********************************/
-	free(ppm);
+	free(ppm_A);
 
 	//test
 	//log
@@ -160,16 +160,16 @@ void _Setup_Options(int argc, char **argv)
 
 void build_PPM_Header()
 {
-	ppm = (PPM *) malloc(sizeof(PPM) * 1);
+	ppm_A = (PPM *) malloc(sizeof(PPM) * 1);
 
-	strcpy(ppm->format, "P6");
+	strcpy(ppm_A->format, "P6");
 
-	ppm->format[2] = '\0';
+	ppm_A->format[2] = '\0';
 
-	ppm->x = ppm_size[0];
-	ppm->y = ppm_size[1];
+	ppm_A->x = ppm_size[0];
+	ppm_A->y = ppm_size[1];
 
-	ppm->max_brightness = max_bright;
+	ppm_A->max_brightness = max_bright;
 
 }
 
@@ -180,9 +180,9 @@ void build_PPM_Pixels(void)
 
     int i, j;
 
-    int num_of_pixels = ppm->x * ppm->y;
+    int num_of_pixels = ppm_A->x * ppm_A->y;
 
-    ppm->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
+    ppm_A->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
 
 //    int default_pixel_val = 150;
 
@@ -242,11 +242,11 @@ void build_PPM_Pixels(void)
 
 	}
 
-    for (i = 0; i < ppm->y; ++i) {
+    for (i = 0; i < ppm_A->y; ++i) {
 
-		for (j = 0; j < ppm->x; ++j) {
+		for (j = 0; j < ppm_A->x; ++j) {
 
-			set_PixelVals(ppm, position, rgb);
+			set_PixelVals(ppm_A, position, rgb);
 
 			position ++;
 

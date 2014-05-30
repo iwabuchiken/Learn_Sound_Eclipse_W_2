@@ -848,3 +848,112 @@ argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\
 [2014:05:30 13:08:42] [..\main\Proc_Wave.c : 634]
 <ppm file saved> audio\b_20140530_130841.ppm
 
+[2014:05:30 14:43:25] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 14:46:04] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 14:46:04] [..\main\Proc_Wave.c : 635]
+<ppm file saved> audio\b_20140530_144604.ppm
+
+[2014:05:30 14:46:15] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 14:46:15] [..\main\Proc_Wave.c : 635]
+<ppm file saved> audio\b_20140530_144615.ppm
+
+[2014:05:30 14:47:14] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 14:47:14] [..\main\Proc_Wave.c : 635]
+<ppm file saved> audio\b_20140530_144714.ppm
+
+[2014:05:30 14:47:37] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 14:47:37] [..\main\Proc_Wave.c : 635]
+<ppm file saved> audio\b_20140530_144737.ppm
+
+[2014:05:30 14:49:00] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 14:49:00] [..\main\Proc_Wave.c : 635]
+<ppm file saved> audio\b_20140530_144900.ppm
+
+[2014:05:30 15:56:46] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 15:56:46] [..\main\Proc_Wave.c : 640]
+<ppm file saved> audio\b_20140530_155646.ppm
+
+[2014:05:30 15:58:29] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 15:58:29] [..\main\Proc_Wave.c : 640]
+<ppm file saved> audio\b_20140530_155829.ppm
+
+[2014:05:30 16:05:49] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 16:05:50] [..\main\Proc_Wave.c : 640]
+<ppm file saved> audio\b_20140530_160549.ppm
+
+[2014:05:30 16:07:17] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 16:07:17] [..\main\Proc_Wave.c : 640]
+<ppm file saved> audio\b_20140530_160717.ppm
+
+[2014:05:30 16:07:45] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 16:07:45] [..\main\Proc_Wave.c : 640]
+<ppm file saved> audio\b_20140530_160745.ppm
+
+[2014:05:30 16:09:10] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 16:09:10] [..\main\Proc_Wave.c : 641]
+<ppm file saved> audio\b_20140530_160910.ppm
+
+[2014:05:30 16:11:31] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 16:11:31] [..\main\Proc_Wave.c : 641]
+<ppm file saved> audio\b_20140530_161131.ppm
+
+[2014:05:30 16:13:21] [..\utils\methods.c : 131]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\b.wav -op wave-to-ppm
+<argc> 9
+
+
+[2014:05:30 16:13:21] [..\main\Proc_Wave.c : 641]
+<ppm file saved> audio\b_20140530_161321.ppm
+

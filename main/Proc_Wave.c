@@ -90,7 +90,8 @@ int max_bright = 255;
 // 2. The value will be one of those in Colors:ppmlib.c
 char *bg_color;
 
-PPM *ppm;
+PPM *ppm_A;
+PPM *ppm_B;
 
 // Pixel values converted from wave data: 0-255
 int pixel_data[DEFALUT_PPM_WIDTH];
@@ -114,14 +115,15 @@ void Proc_Wave__Analyze(void);
 void Proc_Wave__Op_Dispatch(void);
 
 // Op: wave to ppm
-void _op_Wave2PPM(void);
-void build_PPM_Header_Wave(void);
-void build_PPM_Pixels_Wave(void);
+void op_Wave2PPM(void);
+void op_Wave2PPM__Header_Wave(void);
+void op_Wave2PPM__Pixels_Wave(void);
 void build_PPM_Pixels_WaveData(void);
 
 void build_PPM_Pixels_Image(void);
-
-
+void build_PPM_Rotate_Image(void);
+int build_PPM_Rotate_Image__PosConv
+(int pos_A, int A_width, int A_height);
 
 /////////////////////////////////////
 
@@ -146,7 +148,7 @@ void Proc_Wave(int argc, char **argv)
 	/*********************************
 	 * Analyze
 	**********************************/
-	Proc_Wave__Analyze();
+//	Proc_Wave__Analyze();
 
 
 	/*********************************
@@ -524,7 +526,7 @@ void Proc_Wave__Op_Dispatch(void)
 {
 	if (!strcmp(operation, op_names[0])) {	// wave-to-ppm
 
-		_op_Wave2PPM();
+		op_Wave2PPM();
 
 	} else {
 
@@ -532,13 +534,13 @@ void Proc_Wave__Op_Dispatch(void)
 
 }//void Proc_Wave__Op_Dispatch(void)
 
-void _op_Wave2PPM(void)
+void op_Wave2PPM(void)
 {
 
 	/*********************************
 	 * Build: PPM header
 	**********************************/
-	build_PPM_Header_Wave();
+	op_Wave2PPM__Header_Wave();
 
 	//log
 	printf("[%s : %d] PPM header => created\n", base_name(__FILE__), __LINE__);
@@ -546,7 +548,7 @@ void _op_Wave2PPM(void)
 	/*********************************
 	 * Build: PPM pixels: Background
 	**********************************/
-	build_PPM_Pixels_Wave();
+	op_Wave2PPM__Pixels_Wave();
 
 	//log
 	printf("[%s : %d] PPM pixels => created\n", base_name(__FILE__), __LINE__);
@@ -564,6 +566,10 @@ void _op_Wave2PPM(void)
 	//log
 	printf("[%s : %d] ppm pixel image => created\n", base_name(__FILE__), __LINE__);
 
+	/*********************************
+	 * Image: rotate
+	**********************************/
+	build_PPM_Rotate_Image();
 
 	/*********************************
 	 * dst file path
@@ -587,7 +593,8 @@ void _op_Wave2PPM(void)
 	/*********************************
 	 * Save: ppm file
 	**********************************/
-	int res_i = save_PPM(file_dst_ppm, ppm);
+	int res_i = save_PPM(file_dst_ppm, ppm_B);
+//	int res_i = save_PPM(file_dst_ppm, ppm_A);
 
 	if (res_i == 1) {
 
@@ -616,7 +623,7 @@ void _op_Wave2PPM(void)
 	/*********************************
 	 * Free: ppm
 	**********************************/
-	free(ppm);
+	free(ppm_A);
 
 	/*********************************
 	 * Record: execution infos
@@ -636,46 +643,81 @@ void _op_Wave2PPM(void)
 
 }//void _op_Wave2PPM(void)
 
-void build_PPM_Header_Wave()
+void op_Wave2PPM__Header_Wave()
 {
-	ppm = (PPM *) malloc(sizeof(PPM) * 1);
+	ppm_A = (PPM *) malloc(sizeof(PPM) * 1);
 
-	strcpy(ppm->format, "P6");
+	strcpy(ppm_A->format, "P6");
 
-	ppm->format[2] = '\0';
+	ppm_A->format[2] = '\0';
 
-	ppm->x = ppm_size[0];
-	ppm->y = ppm_size[1];
+	ppm_A->x = ppm_size[0];
+	ppm_A->y = ppm_size[1];
 
-	ppm->max_brightness = max_bright;
+	ppm_A->max_brightness = max_bright;
+
+	/*********************************
+	 * ppm_B
+	**********************************/
+
+	ppm_B = (PPM *) malloc(sizeof(PPM) * 1);
+
+	strcpy(ppm_B->format, "P6");
+
+	ppm_B->format[2] = '\0';
+
+	ppm_B->x = ppm_size[0];
+	ppm_B->y = ppm_size[1];
+
+	ppm_B->max_brightness = max_bright;
 
 }
 
-void build_PPM_Pixels_Wave()
+void op_Wave2PPM__Pixels_Wave()
 {
     int position = 0;
 
     int i, j;
 
-    int num_of_pixels = ppm->x * ppm->y;
+    int num_of_pixels = ppm_A->x * ppm_A->y;
 
-    ppm->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
+    ppm_A->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
 
     int rgb[3] = {PIXEL_BLUE};
 
-    for (i = 0; i < ppm->y; ++i) {
+    for (i = 0; i < ppm_A->y; ++i) {
 
-		for (j = 0; j < ppm->x; ++j) {
+		for (j = 0; j < ppm_A->x; ++j) {
 
-			set_PixelVals(ppm, position, rgb);	// set_PixelVals() : ppmlib.c
+			set_PixelVals(ppm_A, position, rgb);	// set_PixelVals() : ppmlib.c
 
 			position ++;
 
 		}
     }
 
+    /*********************************
+	 * PPM: ppm_B
+	**********************************/
+    position = 0;
 
-}
+    num_of_pixels = ppm_B->x * ppm_B->y;
+//
+    ppm_B->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
+
+    for (i = 0; i < ppm_B->y; ++i) {
+
+		for (j = 0; j < ppm_B->x; ++j) {
+
+			set_PixelVals(ppm_B, position, rgb);	// set_PixelVals() : ppmlib.c
+
+			position ++;
+
+		}
+
+    }//for (i = 0; i < ppm_B->y; ++i)
+
+}//void op_Wave2PPM__Pixels_Wave()
 
 void build_PPM_Pixels_WaveData(void)
 {
@@ -685,7 +727,7 @@ void build_PPM_Pixels_WaveData(void)
 
 	int i;
 
-	double val_d;
+//	double val_d;
 
 //	pixel_data[num_of_data];
 //	int pixel_data[num_of_data];
@@ -702,36 +744,6 @@ void build_PPM_Pixels_WaveData(void)
 	//log
 	printf("[%s : %d] Conversion => done\n", base_name(__FILE__), __LINE__);
 
-//	for (i = 0; i < 10; ++i) {
-//
-//		//log
-//		printf("[%s : %d] pixel_data[%d] => %d\n",
-//				base_name(__FILE__), __LINE__, i, pixel_data[i]);
-//
-//	}
-
-
-//    int position = 0;
-//
-//    int i, j;
-//
-//    int num_of_pixels = ppm->x * ppm->y;
-//
-//    ppm->pixels = (pixel *) malloc (sizeof(pixel) * num_of_pixels);
-//
-//    int rgb[3] = {PIXEL_BLUE};
-//
-//    for (i = 0; i < ppm->y; ++i) {
-//
-//		for (j = 0; j < ppm->x; ++j) {
-//
-//			set_PixelVals(ppm, position, rgb);	// set_PixelVals() : ppmlib.c
-//
-//			position ++;
-//
-//		}
-//    }
-
 }//void build_PPM_Pixels_WaveData(void)
 
 void build_PPM_Pixels_Image(void)
@@ -742,21 +754,118 @@ void build_PPM_Pixels_Image(void)
 
 	int i, j;
 
-	for (i = 0; i < ppm->y; ++i) {
+	for (i = 0; i < ppm_A->y; ++i) {
 
 		for (j = 0; j < pixel_data[i]; ++j) {
 
-			set_PixelVals(ppm, position, rgb);
+			set_PixelVals(ppm_A, position, rgb);
 
 			position ++;
 
 		}
 
-		for(; j < ppm->x; j++) {
+		for(; j < ppm_A->x; j++) {
 
 			position ++;
 
 		}
 	}
 
+	/*********************************
+	 * Rotate image
+	**********************************/
+
+
 }//void build_PPM_Pixels_Image(void)
+
+void build_PPM_Rotate_Image(void)
+{
+	int pos_A = 0;
+	int pos_B;
+
+	int i, j;
+
+//	for (i = 0; i < 3; ++i) {
+	for (i = 0; i < ppm_A->y; ++i) {
+
+//		for (j = 0; j < 3; ++j) {
+		for (j = 0; j < ppm_A->x; ++j) {
+//		for (j = 0; j < pixel_data[i]; ++j) {
+
+			pos_B = build_PPM_Rotate_Image__PosConv(pos_A, ppm_A->x, ppm_A->y);
+//			pos_B = build_PPM_Rotate_Image__PosConv(pos_A, 3, 3);
+
+			ppm_B->pixels[pos_B].r = ppm_A->pixels[pos_A].r;
+			ppm_B->pixels[pos_B].g = ppm_A->pixels[pos_A].g;
+			ppm_B->pixels[pos_B].b = ppm_A->pixels[pos_A].b;
+
+//			//log
+//			printf("[%s : %d] pos_A = %d / pos_B = %d\n",
+//					base_name(__FILE__), __LINE__, pos_A, pos_B);
+
+//			int w = 3;
+//
+//			int res = pos_A % w;
+//
+//			int div = pos_A / w;
+////			int div = pos_A - (pos_A / w);
+//
+//			int B_X = div;
+//			int B_Y = (w - 1) - res;
+//
+//			pos_B = B_Y * w + B_X;
+//
+//			//log
+//			printf("[%s : %d] pos_A = %d / pos_B = %d\n",
+//					base_name(__FILE__), __LINE__, pos_A, pos_B);
+
+//			ppm_B->pixels[ppm_B->y * ] = ppm_A->pixels->r;
+//			ppm_B->pixels[(ppm_A->x - 1) - j][i * 3 + 0] = ppm_A->pixels->r;
+//			ppm_B->pixels[(ppm_A->x - 1) - j][i * 3 + 0] = ppm_A->pixels->r;
+//			row_pointers_C[(width - 1) - x][y * 3 + 1] = ptr_B[1];
+//			row_pointers_C[(width - 1) - x][y * 3 + 2] = ptr_B[2];
+
+//			set_PixelVals(ppm_A, position, rgb);
+
+
+
+			pos_A ++;
+
+		}
+
+//		for(; j < ppm_A->x; j++) {
+//
+//			position ++;
+//
+//		}
+	}
+
+	//log
+	printf("[%s : %d] Rotation => done\n", base_name(__FILE__), __LINE__);
+
+
+}//void build_PPM_Rotate_Image(void)
+
+int build_PPM_Rotate_Image__PosConv
+(int pos_A, int A_width, int A_height)
+{
+
+	int pos_B;
+//	int w = 3;
+
+	int res = pos_A % A_width;
+
+	int div = pos_A / A_width;
+
+	int B_X = div;
+	int B_Y = (A_height - 1) - res;
+
+	pos_B = B_Y * A_width + B_X;
+
+	return pos_B;
+
+//	//log
+//	printf("[%s : %d] pos_A = %d / pos_B = %d\n",
+//			base_name(__FILE__), __LINE__, pos_A, pos_B);
+
+}

@@ -14,7 +14,7 @@
 // Vars
 
 //////////////////////////////////
-PPM *ppm;
+//PPM *ppm;
 
 void Max_Vals(int argc, char **argv)
 {
@@ -24,6 +24,25 @@ void Max_Vals(int argc, char **argv)
 
 	//////////////////////////////////
 	_Setup_Options_Max_Vals(argc, argv);
+
+	//////////////////////////////////
+
+	// Get: PCM
+
+	//////////////////////////////////
+	mono_wave_read(&pcm0, src_Max_Vals);
+
+	//log
+	printf("[%s : %d] pcm => loaded\n", base_name(__FILE__), __LINE__);
+
+
+
+	//////////////////////////////////
+
+	// free
+
+	//////////////////////////////////
+	free(pcm0.s);
 
 
 }

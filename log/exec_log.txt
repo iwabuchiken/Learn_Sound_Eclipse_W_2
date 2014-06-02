@@ -1395,3 +1395,13 @@ argc=9: .\Debug\Learn_Sound_Eclipse_W.exe -app wave -src audio\a.wav -dst audio\
 <argc> 5
 
 
+[2014:06:02 10:56:34] [..\utils\methods.c : 146]
+<argv> C:\WORKS\WS\Eclipse_Kepler\Learn_Sound_Eclipse_W\Debug\Learn_Sound_Eclipse_W.exe
+<argc> 1
+
+
+[2014:06:02 10:56:49] [..\utils\methods.c : 146]
+<argv> .\Debug\Learn_Sound_Eclipse_W.exe -app max-vals -src audio\a.wav
+<argc> 5
+
+

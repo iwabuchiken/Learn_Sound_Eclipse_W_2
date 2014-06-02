@@ -101,10 +101,6 @@ extern "C" {
 #include <sys/time.h>
 #endif
     
-#ifndef WAVE_H
-#include "wave.h"
-#endif
-
 ///////////////////////////////////////////////////////
 
 // Defines

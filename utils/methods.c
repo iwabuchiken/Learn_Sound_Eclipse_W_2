@@ -61,16 +61,6 @@ void show_help(void)
 
     		"\t\t" "minimu is 255, max is 500" "\n"
 
-	"\t-app\n"
-			"\t\t" "app name to be executed\n"
-			"\t\t\t" "gen-ppm\n"
-			"\t\t\t" "wave\n"
-			"\t\t\t" "max-vals\n"
-
-    "<Examples>\n"
-
-    "-app max-vals\n"
-    "\t" "Learn_Sound_Eclipse_W.exe -app max-vals -src audio\\a.wav"
     ;
 
 

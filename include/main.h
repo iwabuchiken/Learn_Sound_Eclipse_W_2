@@ -50,7 +50,7 @@ void dispather(int, char**);
 
 void Gen_PPM(int, char **);
 void Proc_Wave(int argc, char **argv);
-
+//void Max_Vals(int argc, char **argv);
 
 
 #endif /* MAIN_H_ */

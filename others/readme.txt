@@ -15,6 +15,9 @@ pushd C:\WORKS\WS\Eclipse_Kepler\Learn_Sound_Eclipse_W
 .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images/test_D-5_v-4-0.ppm -size 255,255 
 .\Debug\Learn_Sound_Eclipse_W.exe -app gen-ppm -dst images\test_D-5_v-4-0.ppm -size 255,255 -bright 255 -bg gray
 
+# Max_Vals
+.\Debug\Learn_Sound_Eclipse_W.exe -app max-vals -src audio\a.wav
+
 # Ubuntu
 
 ------------------------

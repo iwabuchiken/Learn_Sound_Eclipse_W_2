@@ -51,7 +51,8 @@
 const char *app_names[] = {
 
 		"gen-ppm",
-		"wave"
+		"wave",
+		"max-vals"
 
 };
 
@@ -141,6 +142,10 @@ void dispather(int argc, char** argv)
 	} else if (!strcmp(opt_val, app_names[1])) {	// "wave"
 
 		Proc_Wave(argc, argv);
+
+	} else if (!strcmp(opt_val, app_names[2])) {	// "max-vals"
+
+		Max_Vals(argc, argv);
 
 	} else {
 
